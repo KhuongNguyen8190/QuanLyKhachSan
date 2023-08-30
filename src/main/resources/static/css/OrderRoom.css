@@ -1,0 +1,15 @@
+@charset "ISO-8859-1";
+
+.order-room--info-check-body {
+	display: flex;
+}
+
+.order-room--info-check-item {
+	flex: 1;
+}
+
+.order-room--info-check-footer button {
+	float: right;
+	margin-right: 40px;
+	width: 100px;
+}

@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<link rel="stylesheet" href="/css/admin/index.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"
+	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/order.css" type="text/css">
+</head>
+<body>
+	<div id="header" th:replace="@{admin/menu}"></div>
+	<div class="container" style="min-height: 460px;">
+		<div class="message" th:if="${session.message != null}">
+			<div class="alert alert-success">
+				<strong>Sửa thành công!</strong>
+			</div>
+			<th:block th:text="${@sessionService.removeMessage()}"></th:block>
+
+		</div>
+		<!--<div class="header-room-top">
+			 <div class="header-room-top-content">
+				<div class="header-search">
+					<input class="search-input" placeholder="Tìm kiếm ..." />
+					<button class="search-button"><i class="fa-solid fa-magnifying-glass"></i></button>
+				</div>
+			</div> 
+		</div>-->
+		<div class="header-room">
+			<div class="header-content">
+				<div class="header-content-item btn-success">
+					<a th:href="@{/admin/orders}" class="header-content-item-button">Tất
+						cả [[${sizeAll}]]</a>
+				</div>
+				<div class="header-content-item btn-success"
+					style="min-width: 110px;">
+					<a th:href="@{/admin/orders?type=1}"
+						style="background-color: #469f48"
+						class="header-content-item-button">Phòng trống
+						([[${roomAvailable}]])</a>
+				</div>
+				<div class="header-content-item btn-primary"
+					style="min-width: 110px;">
+					<a th:href="@{/admin/orders?type=2}"
+						style="background-color: #0a58ca"
+						class="header-content-item-button">Đang ở
+						([[${roomUnAvailable}]])</a>
+				</div>
+				<div class="header-content-item btn-warning"
+					style="min-width: 110px;">
+					<a th:href="@{/admin/orders?type=3}"
+						style="background-color: #ffc107"
+						class="header-content-item-button ">Nhận phòng
+						([[${sizeRoomOrder}]])</a>
+				</div>
+				<div class="header-content-item " style="min-width: 110px;">
+					<a th:href="@{/admin/orders?type=4}"
+						class="header-content-item-button ">Quá hạn
+						([[${roomOverdue}]])</a>
+				</div>
+				<div class="header-content-item ">
+					<a th:href="@{/admin/orders?type=5}"
+						class="header-content-item-button purpleColor">Chưa dọn
+						([[${roomNotClean}]])</a>
+				</div>
+				<div class="header-content-item btn-secondary">
+					<a th:href="@{/admin/orders?type=6}"
+						style="background-color: #6c757d"
+						class="header-content-item-button ">Đang sửa ([[${roomFix}]])</a>
+				</div>
+			</div>
+			<div class="header-left">
+				<div class="dropdown">
+					<button type="button" class="btn dropdown-toggle"
+						data-bs-toggle="dropdown">Tuỳ chọn khác</button>
+					<ul class="dropdown-menu">
+						<li><a id="btn-order-room" class="dropdown-item"
+							th:href="@{/admin/order-room}">Đặt phòng</a></li>
+					</ul>
+				</div>
+
+			</div>
+		</div>
+		<div class="content-room">
+			<div class="content-room-body">
+				<!-- <div class="content-room-top">Lầu 1</div> -->
+				<!-- 1 phòng còn trống -->
+				<div class="row content-room-center">
+					<div th:if="${typeOrderRoom}" class="col-2"
+						th:each="room : ${rooms}" th:object="${room.value}">
+						<!-- 3 phòng đã đặt -->
+						<a
+							th:with="keyOrderRoom=${@orderRoomDAO.findKeyByIdRoom(room.key)}"
+							class="detail-room yellowColor"
+							th:href="@{|/admin/orders/form-edit-order-room/${keyOrderRoom}|}"
+							data-toggle="modal">
+							<div class="detail-room-item">
+								<p>Phòng [[*{name}]]</p>
+								<i class="fa-solid fa-file-pen"></i>
+								<div th:with="orderRoom=${@orderRoomDAO.findByIdRoom(keyOrderRoom)}">
+									<p class="order-time-in">ngày checkin :
+										[[${@format.formatDate(orderRoom.dateCheckIn)}]]</p>
+									<div>
+										<p>[[${orderRoom.nameCustomer}]]</p>
+									</div>
+								</div>
+							</div>
+						</a>
+					</div>
+					<div th:unless="${typeOrderRoom}" class="col-2"
+						th:each="room : ${rooms}" th:object="${room.value}"
+						th:switch="${room.value.status}">
+						<a th:case="'1'" class="detail-room "
+							th:classappend="${typeOrderRom} ? yellowColor : '' "
+							th:href="@{|/admin/orders/detail-room/${room.key}?status=1|}">
+							<div class="detail-room-item">
+								<p>Phòng [[*{name}]]</p>
+								<i class="fa-solid fa-circle-check"></i>
+								<p>(còn trống)</p>
+							</div>
+						</a>
+						<!-- 2 phòng đang ở -->
+						<a th:case="'2'" class="detail-room blueColor"
+							th:href="@{|/admin/orders/detail-room/${room.key}?status=2|}">
+							<div class="detail-room-item">
+								<p>Phòng [[*{name}]]</p>
+								<i class="fa-solid fa-bed"></i>
+								<div th:with="order=${@orderDAO.findByIdRoom(room.key)}">
+									<p class="order-time-in">Lúc vào :
+										[[${@format.formatTime(order.timeCheckInDate)}]]</p>
+									<div th:with="customer=${order.customer}">
+										<p th:each="c : ${customer}" th:object="${c.value}">
+											[[*{name}]]</p>
+									</div>
+								</div>
+
+							</div>
+						</a>
+						<!-- 3 phòng đã đặt -->
+						<a th:case="'3'" class="detail-room yellowColor"
+							th:href="@{|/admin/orders/form-edit-order-room/${room.key}|}"
+							data-toggle="modal">
+							<div class="detail-room-item">
+								<p>Phòng [[*{name}]]</p>
+								<i class="fa-solid fa-file-pen"></i>
+								<div th:with="orderRoom=${@orderRoomDAO.findByIdRoom(room.key)}">
+									<p class="order-time-in">ngày checkin :
+										[[${@format.formatDate(orderRoom.dateCheckIn)}]]</p>
+									<div>
+										<p>[[${orderRoom.nameCustomer}]]</p>
+									</div>
+								</div>
+							</div>
+						</a>
+						<!-- 4 phòng quá hạn -->
+						<a th:case="'4'" class="detail-room redColor"
+							th:href="@{|/admin/orders/detail-room/${room.key}?status=4|}">
+							<div class="detail-room-item">
+								<p>Phòng [[*{name}]]</p>
+								<i class="fa-solid fa-x"></i>
+
+							</div>
+						</a>
+						<!-- 5 phòng chưa dọn -->
+						<a th:case="'5'" class="detail-room purpleColor" id="clean-room"
+							th:href="@{|/admin/orders/detail-room/${room.key}?status=5|}">
+							<div class="detail-room-item">
+								<p>Phòng [[*{name}]]</p>
+								<i class="fa-solid fa-broom"></i>
+
+							</div>
+						</a>
+						<!-- 5 phòng đang sửa -->
+						<a th:case="'6'" class="detail-room greyColor"
+							th:href="@{|/admin/orders/detail-room/${room.key}?status=6|}">
+							<div class="detail-room-item">
+								<p>Phòng [[*{name}]]</p>
+								<i class="fa-solid fa-wrench"></i>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div>
+			<!-- <div class="content-room-body">
+				<div class="content-room-top">Lầu 1</div>
+				<div class="row content-room-center">
+					<div class="col-2" th:each="room : ${rooms}"
+						th:object="${room.value}">
+						<a class="detail-room"
+							th:href="@{|/admin/orders/detail-room/${room.key}|}">
+							<div class="detail-room-item">
+								<p>Phòng [[*{name}]]</p>
+								<i class="fa-solid fa-circle-check"></i>
+								<p></p>
+							</div>
+						</a>
+					</div>
+				</div>
+			</div> -->
+		</div>
+	</div>
+	<div id="footer" th:replace="@{user/footer}"></div>
+	<!-- The Modal -->
+	<div class="modal fade" id="myModal">
+		<div class="modal-dialog modal-sm">
+			<div class="modal-content"></div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	$(document).ready(
+			function() {
+				$("#clean-room").on(
+						'click',
+						function(e) {
+							e.preventDefault();
+							$('#myModal').modal('show').find('.modal-content')
+									.load($(this).attr('href'))
+						})
+			})
+</script>
+
+<script type="text/javascript">
+	const messageTimeOut = setTimeout(closeMessage, 3000)
+
+	function closeMessage() {
+		$('.message').fadeOut();
+	}
+</script>
+</html>

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link href="/css/container.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="header" th:replace="@{user/menu}"></div>
+	<div class="main-container">
+		<div id="carouselExampleIndicators" class="carousel slide"
+			data-bs-ride="carousel">
+			<ol class="carousel-indicators">
+				<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="0"
+					class="active"></li>
+				<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="1"></li>
+				<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="2"></li>
+				<li data-bs-target="#carouselExampleIndicators" data-bs-slide-to="3"></li>
+			</ol>
+			<div class="carousel-inner">
+				<div class="carousel-item active">
+					<img src="/images/noi-that-khach-san-5-sao-2.jpg" class
+						alt="Image 1">
+				</div>
+				<div class="carousel-item">
+					<img src="/images/phong-1-giuong-don.jpg" class alt="Image 2">
+				</div>
+				<div class="carousel-item">
+					<img src="/images/phong-2-giuong-don.jpg" class alt="Image 3">
+				</div>
+				<div class="carousel-item">
+					<img
+						src="/images/thiet-ke-noi-that-khach-san-kieu-phap-viphouse-vn-5.jpg"
+						class alt="Image 4">
+				</div>
+			</div>
+			<a class="carousel-control-prev" href="#carouselExampleIndicators"
+				role="button" data-bs-slide="prev"> <span
+				class="carousel-control-prev-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Previous</span>
+			</a> <a class="carousel-control-next" href="#carouselExampleIndicators"
+				role="button" data-bs-slide="next"> <span
+				class="carousel-control-next-icon" aria-hidden="true"></span> <span
+				class="visually-hidden">Next</span>
+			</a>
+		</div>
+		<div class="contact-slogan">
+			<div class="slogan">
+				Với phương châm
+				<p id="text-animation">cam kết về chất lượng</p>
+			</div>
+			<div class="contact">
+				<label for="phone">Bạn cần tư vấn ?</label>
+				<div>
+					<input type="search" id="phone" placeholder="Để lại số điện thoại">
+					<button type="submit">Liên Hệ</button>
+				</div>
+			</div>
+		</div>
+		<div id="room" class="p-5"></div>
+		<div class="room">
+			<form th:each="type : ${typerooms}" th:object="${type.value}"
+				class="room-order">
+				<div class="heading">
+					<i class="bi bi-house" th:text="*{#strings.capitalizeWords(name)}"></i>
+				</div>
+				<div class="price"
+					th:text="*{#numbers.formatDecimal(price,0,'COMMA',0,'POINT')}">
+				</div>
+				<img th:src="@{'data:image/png;base64,' + *{images[0]}}"
+					alt="Room Image">
+				<div class="content">[(*{description})]</div>
+				<div class="check-room">
+					<button class="btn btn-primary"
+						th:formaction="@{|/infomation-room/${type.key}|}">Chi
+						Tiết</button>
+				</div>
+			</form>
+		</div>
+		<div id="service"></div>
+		<div class="service">
+			<div class="pool">
+				<div class="content">
+					<div class="heading">Hồ bơi ngoài trời</div>
+					<div class="main-content">-Hồ bơi ngoài trời được các khách
+						sạn có diện tích mặt bằng lớn khá ưu chuộng và đưa vào xây dựng
+						nhiều.Bằng việc mang đến một không gian sân vườn có mỹ quan đẹp
+						với bể bơi phục vụ,du khách chắc chắn sẽ cảm thấy tuyệt vời với hạ
+						tầng dịch vụ tại khách sạn.Hồ bơi ngoài trời còn giúp tăng đáng kể
+						lượng khách không lưu trú nhưng muốn sử dụng dịch vụ bơi tại khách
+						sạn.</div>
+				</div>
+				<div class="image">
+					<img src="/images/ho-boi.jpg" alt>
+				</div>
+			</div>
+			<div class="restaurant">
+				<div class="content">
+					<div class="heading">Nhà hàng</div>
+					<div class="main-content">Ở những khách sạn cao cấp 4 đến 5
+						sao, có thể bao gồm khu phức hợp nhà hàng, với nhiều loại thiết kế
+						nhà hàng sang trọng theo các phong cách khác nhau. Đến với dịch vụ
+						nhà hàng du khách có thể đặt cho mình các bữa ăn tự chọn, buffet
+						hoặc các món ăn theo gia đình… với nhiều lựa chọn hương vị ẩm thực
+						khác nhau.</div>
+				</div>
+				<div class="image">
+					<img src="/images/nha-hang.jpg" alt>
+				</div>
+			</div>
+			<div class="bar">
+				<div class="content">
+					<div class="heading">Quầy Bar</div>
+					<div class="main-content">Quầy bar cũng là một dịch vụ cao
+						cấp thường thấy trong các nhà hàng cao cấp. Tùy theo quy mô của
+						khách sạn mà vị trí cũng như thiết kế quầy bar sẽ khác nhau. Đa
+						phần các quầy bar đều phục vụ thức uống, nhạc,... đáp ứng nhu cầu
+						giải trí, thư giãn của du khách.</div>
+				</div>
+				<div class="image">
+					<img src="/images/bar.jpg" alt>
+				</div>
+			</div>
+			<div class="fitness">
+				<div class="content">
+					<div class="heading">Fitness Center</div>
+					<div class="main-content">Các phòng tập thể dục đa năng hay
+						các phòng tập gym luôn là nơi được du khách quan tâm. Khi đi công
+						tác hay du lịch nhưng nhiều người vẫn muốn đảm bảo tiến độ tập
+						luyện cho cơ thể mình. Đây là lí do các phòng tập gym ra đời và
+						ngày càng mở rộng.</div>
+				</div>
+				<div class="image">
+					<img src="/images/fitness.jpg" alt>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div id="footer" th:replace="@{user/footer}"></div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		//TYPING WORDS
+		const textElement = document.getElementById('text-animation');
+		const texts = [ "cam kết về chất lượng",
+				"lấy khách hàng làm trọng tâm", "lắng nghe ý kiến khách hàng",
+				"toàn tâm toàn ý" ];
+		let index = 0;
+		let isDeleting = false;
+		let typingSpeed = 100;
+		let deletingSpeed = 50;
+
+		function animateText() {
+			const currentText = texts[index];
+			if (!isDeleting) {
+				textElement.textContent += currentText
+						.charAt(textElement.textContent.length);
+				if (textElement.textContent === currentText) {
+					isDeleting = true;
+				}
+			} else {
+				textElement.textContent = currentText.substring(0,
+						textElement.textContent.length - 1);
+				if (textElement.textContent === '') {
+					isDeleting = false;
+					typingSpeed = 200;
+					index++;
+					if (index >= texts.length) {
+						index = 0;
+					}
+				}
+			}
+			if (textElement.textContent === currentText) {
+				setTimeout(function() {
+					setTimeout(animateText, isDeleting ? deletingSpeed
+							: typingSpeed);
+				}, 3000);
+			} else {
+				setTimeout(animateText, isDeleting ? deletingSpeed
+						: typingSpeed);
+			}
+		}
+
+		animateText();
+	</script>
+</body>
+<html>

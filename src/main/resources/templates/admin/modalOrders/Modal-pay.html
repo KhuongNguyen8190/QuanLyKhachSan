@@ -1,0 +1,183 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+
+<title>Document</title>
+<link rel="stylesheet" href="/css/admin/index.css">
+<link rel="stylesheet" href="/css/layout.css" type="text/css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"
+	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/order.css" type="text/css">
+</head>
+<body>
+	<div id="header" th:replace="@{admin/menu}"></div>
+
+	<div class="container body-content"
+		style="min-height: 460px; margin-top: 10px; min-height: 460px; background-color: #fff; padding: 60px; margin-top: 20px !important;">
+		<div class="body-content-title">
+			<h1>Trả phòng</h1>
+		</div>
+		<!-- The Modal -->
+		<form th:object="${order}" id="form">
+
+			<!-- Modal body -->
+			<div class="modal-body"
+				style="border: 1px solid #3333; padding: 20px"
+			>
+				<div class="row">
+					<h4 class="modal-title">Thông tin phòng [[${roomOrder.name}]]</h4>
+					<div class="col">
+						<div>
+							<p>
+								Ngày nhận phòng : <b style="margin-left: 10px;">[[${time}]]</b>
+							</p>
+							<p>
+								Loại phòng : <b style="margin-left: 10px;">[[${typeRoom.name}]]</b>
+							</p>
+							<p>
+								Giá phòng : <b style="margin-left: 10px;">[[${priceRoom}]]
+									VND / ngày</b>
+
+							</p>
+							<p>*nếu thời gian ở dưới 1 giờ tiền phòng còn 100.000 VND</p>
+
+						</div>
+					</div>
+					<div class="col">
+						<div>
+							<p>
+								Tổng thời gian ở : <b style="margin-left: 10px;">[[${totalTime}]]</b>
+							</p>
+							<p>
+								Ngày trả phòng dự kiến (đặt trước) : <b
+									style="margin-left: 10px;"></b>
+							</p>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<h4>Thông tin khác hàng</h4>
+					<div class="col">
+						<div class="form-group" hidden="true">
+							<label for="name">Tên khách hàng: </label> <input
+								th:value="${keyOrder}" id="keyOrder" class="form-group-item" />
+						</div>
+						<div class="form-group">
+							<label for="name">Tên khách hàng: </label> <input readonly
+								th:field="${customer.name}" class="form-group-item" />
+						</div>
+						<div class="form-group">
+							<label for="phone">Số điện thoại: </label> <input readonly
+								th:field="${customer.phone}" class="form-group-item" />
+						</div>
+						<div class="form-group">
+							<label for="CCCD"> CCCD/CMND: </label> <input readonly
+								th:field="${customer.CCCD}" class="form-group-item" />
+						</div>
+						<div class="form-group">
+							<label for="numberPeople"> Số người: </label> <input readonly
+								th:field="*{numberPeople}" class="form-group-item" />
+						</div>
+					</div>
+					<div class="row">
+						<div class="col">
+							<div class="form-service">
+								<div class="form-group-serviced">
+									<p>Dịch vụ bạn sử dụng :</p>
+									<div class="container mt-3">
+										<table class="table" style="width: 100% !important;">
+											<thead>
+												<tr>
+													<th>Tên dịch vụ</th>
+													<th>Giá</th>
+													<th></th>
+												</tr>
+											</thead>
+											<tbody>
+												<tr class="sv"></tr>
+												<tr class="sv" th:each="so : ${serviceOrder}"
+													th:object="${so.value}" th:value="${so.key}">
+													<td th:text="*{name}"></td>
+													<td th:text="*{price}"></td>
+													<td></td>
+												</tr>
+											</tbody>
+										</table>
+									</div>
+								</div>
+							</div>
+
+
+						</div>
+						<div class="col">
+							<div class="info-bill">
+								<p>Tổng tiền phòng :[[${totalMoneyRoom}]] VND</p>
+								<p>Tổng dịch vụ : [[${totalPriceService}]] VND</p>
+								<p>Tiền khuyến mãi :</p>
+								<p>Tổng thành tiền : [[${totalMoney}]] VND</p>
+							</div>
+							<div th:if="${paySuccess}">
+								<p th:text="${paySuccess}"></p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- Modal footer -->
+
+				<div class="modal-footer" th:unless="${paySuccess}">
+					<div class="modal-footer-item">
+						<a id="btn-pay" th:if="paySuccess"
+							th:href="@{|/admin/orders/pay/${keyOrder}?idRoom=${idRoom}|}"
+							class="btn btn-success">Xác nhận thanh toán</a> <a
+							th:href="@{/admin/orders}" class="btn btn-danger">Trở về</a>
+					</div>
+				</div>
+				<div class="modal-footer" th:if="${paySuccess}">
+					<div class="modal-footer-item">
+					
+						<a class="btn btn-success"
+							th:href="@{|/admin/order/print-bill/${keyOrder}|}">In hoá đơn
+						</a>
+						<button id="btn-pay" disabled="true" style="width: 130px"
+						 class="btn btn-success">Đã
+							thanh toán</button>
+
+						<a th:href="@{/admin/orders}" class="btn btn-danger">Trở về</a>
+					</div>
+				</div>
+			</div>
+		</form>
+	</div>
+<div id="footer" th:replace="@{user/footer}"></div>
+</body>
+<!-- <script type="text/javascript">
+	const messageTimeOut = setTimeout(closeMessage, 3000)
+
+	function closeMessage() {
+		$('.message').fadeOut();
+	} 
+</script> -->
+<!-- <label>Khuyễn mãi: </label> <select>
+								<option>-----Khuyễn mãi-----</option>
+								<option th:each="item : ${promotionMap}"
+									th:oject="${item.value}">Khuyễn mãi [[*{value}]] %
+									[[*{name}]]</option>
+							</select> -->
+
+</html>
+

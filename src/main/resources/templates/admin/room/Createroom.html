@@ -1,0 +1,34 @@
+<div class="modal fade" id="modalRegisterFormCreaRoom" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<h4 class="modal-title w-100 font-weight-bold">Tạo phòng mới</h4>
+			</div>
+			<form th:object="${roomfind}" method="post" name="frmCreateRoom" onsubmit="return ValidateCreateRoom()">
+				<div class="mb-3">
+					<label for="fullname">Tên phòng:</label> <input type="text" name id="fullname" th:field="*{name}"
+						placeholder>
+				</div>
+				<span id="errnameCreateroom" style="color: red"></span>
+				<div class="mb-3">
+					<label for="price">Loại phòng:</label>
+					<select id="lang-select" th:field="*{typeroom}">
+						<option th:each="i:${listtype}" th:value="${i.key}" th:text="${i.value.name}"></option>
+					</select>
+				</div>
+				<button type="submit" class="btn btn-success" th:formaction="@{|/createRoom|}">Lưu</button>
+			</form>
+		</div>
+	</div>
+</div>
+<script type="text/javascript">
+	function ValidateCreateRoom() {
+		var name = document.frmCreateRoom.name.value;
+		if (name == '') {
+			document.getElementById("errnameCreateroom").innerHTML = "Tên không được để trống"
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>

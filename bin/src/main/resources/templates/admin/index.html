@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="/css/admin/index.css">
+</head>
+<body>
+    <div id="header" th:replace="@{admin/menu}"></div> 
+    <div class="container">
+        <div class="this-month">
+            <div class="card total">
+                <div class="heading">Doanh Thu Tháng Này</div>
+                <b class="total"><i class='bx bx-money'></i>100.000đ</b>
+            </div>
+            <div class="card user">
+                <div class="heading">Khách Hàng Tháng Này</div>
+                <b class="person"><i class='bx bx-user'></i>372 Người</b>
+            </div>
+            <div class="card user">
+                <div class="heading">Số Phòng Còn Trống</div>
+                <b class="person"><i class='bx bx-door-open'></i>120 Phòng</b>
+            </div>
+            <div class="card user">
+                <div class="heading">Số Phòng Đã Đặt</div>
+                <b class="person"><i class='bx bx-window-close' ></i>72 Phòng</b>
+            </div>
+        </div>
+        <div class="every-month">
+            <table class="table">
+                <thead>
+                  <tr>
+                    <th scope="col">Doanh Thu Tháng</th>
+                    <th scope="col">Số Lượng Khách</th>
+                    <th scope="col">Tổng Doanh Thu</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr>
+                    <th scope="row">1</th>
+                    <td>273</td>
+                    <td>12.000.000đ</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">2</th>
+                    <td>273</td>
+                    <td>12.000.000đ</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">3</th>
+                    <td>273</td>
+                    <td>12.000.000đ</td>
+                  </tr>
+                  <tr>
+                    <th scope="row">4</th>
+                    <td>273</td>
+                    <td>12.000.000đ</td>
+                  </tr>
+                </tbody>
+              </table>
+        </div>
+    </div>
+    <div id="footer" th:replace="@{user/footer}"></div>
+</body>
+</html>

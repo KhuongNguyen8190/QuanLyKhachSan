@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link href="/css/sign-in.css" rel="stylesheet" />
+<link href="/css/footer.css" rel="stylesheet" />
+</head>
+<body>
+	<div id="header" th:replace="@{user/menu}"></div>
+	<form class="login-normal" id="loginForm" action="/auth/login" method="post">
+		<div class="heading">ĐĂNG NHẬP</div>
+		<b th:text="${message}" style="color:red;"></b>
+		<div class="mb-3">
+			<input type="email" class="form-control" name="username" id="username">
+			<label for="username" class="form-label">Email</label>
+		</div>
+		<div class="mb-3">
+			<input type="password" class="form-control" name="password"
+				id="password"> <label for="password" class="form-label">Mật
+				Khẩu</label>
+		</div>
+		<button type="submit" id="btnSignIn" class="btn btn-primary">Đăng Nhập</button>
+		<div class="mb-3 sign-up-account">
+			<div>
+				Bạn chưa có tài khoản? <a style="color: blue"
+					onclick="redirectURL('/sign-up')">Đăng Kí Ngay</a>
+			</div>
+			<div class="forgot-password">
+				<a style="color: blue" onclick="redirectURL('/forgot-password')">
+					Quên Mật Khẩu</a>
+			</div>
+		</div>
+	</form>
+	<div id="sign-up">
+		<form action class="login-oauth2">
+			<div class="mb-3">
+				<a href="/oauth2/authorization/google" class="btn btn-primary"><i
+					class="bi bi-google"></i>Đăng Nhập Với Google</a>
+			</div>
+			<div class="mb-3">
+				<a href="/oauth2/authorization/facebook" class="btn btn-primary"><i
+					class="bi bi-facebook"></i>Đăng Nhập Với Facebook</a>
+			</div>
+		</form>
+	</div>
+	<div id="footer" th:replace="~{user/footer}"></div>
+	<script
+		src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+	<script>
+		const inputs = document.querySelectorAll('.form-control');
+		const labels = document.querySelectorAll('.form-label');
+
+		inputs.forEach(function(input, index) {
+			input.addEventListener('blur', function() {
+				if (input.value.trim() !== '') {
+					labels[index].textContent = input
+							.getAttribute('data-label');
+				}
+			});
+		});
+		
+		$(document).ready(function() {
+	        $("#loginForm").submit(function(e) {
+	            e.preventDefault();
+	            
+	            var username = $("#username").val();
+	            var password = $("#password").val();
+
+	            $.ajax({
+	                url: "/auth/login",
+	                type: "POST",
+	                data: {
+	                    username: username,
+	                    password: password
+	                },
+	                success: function(response) {
+	                	if (response.success === true) {
+	                		redirectURL("/");
+	                    } else {
+	                    	thongBao('Thông Báo!',response.message,'error',true);
+	                    }
+	                },
+					error : function(xhr, status, error) {
+						thongBao('Thông Báo!',error,'error',true);
+					}
+	            });
+	        });
+	    });
+	</script>
+</body>
+</html>

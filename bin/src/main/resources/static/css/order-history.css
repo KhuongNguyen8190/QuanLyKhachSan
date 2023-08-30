@@ -1,0 +1,53 @@
+.content {
+	width: 100%;
+	margin: 0 auto;
+	margin-top: 100px;
+	margin-bottom: 30px;
+	padding: 20px;
+	border-radius: 5px;
+}
+
+.content>.heading {
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+	color: blue;
+	margin: 10px 0;
+}
+
+.nav-tabs {
+	border: none !important;
+}
+
+.nav-tabs .nav-item .nav-link {
+	border: none;
+	outline: none;
+	position: relative;
+}
+
+.nav-tabs .nav-item .nav-link::after {
+	position: absolute;
+	content: "";
+	width: 0;
+	height: 1px;
+	left: 0;
+	bottom: 0;
+	background-color: red;
+	transition: all .5s ease;
+}
+
+.nav-tabs .nav-item .nav-link.active {
+	color: red;
+}
+
+.nav-tabs .nav-item .nav-link.active::after {
+	width: 100%;
+}
+
+.tab-content {
+	margin-top: 10px;
+}
+
+table.table-striped td:nth-child(5) .btn-danger {
+	margin-left: 5px;
+}

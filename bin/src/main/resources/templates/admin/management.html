@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="/css/admin/service-room.css">
+</head>
+
+<body>
+	<!--Typeroom-->
+	<div id="createModel" th:replace="@{admin/typeroom/CreateTyperoom.html}"></div>
+	<div id="createModel" th:replace="@{admin/typeroom/UpdateTyperoom.html}"></div>
+	<div id="createModel" th:replace="@{admin/typeroom/DeleteTyperoom.html}"></div>
+	<!--Serviceroom-->
+	<div id="createModel" th:replace="@{admin/serviceroom/CreateServiceroom.html}"></div>
+	<div id="createModel" th:replace="@{admin/serviceroom/UpdateServiceroom.html}"></div>
+	<div id="createModel" th:replace="@{admin/serviceroom/DeleteServiceroom.html}"></div>
+	<!--Room-->
+	<div id="createModel" th:replace="@{admin/room/Createroom.html}"></div>
+	<div id="createModel" th:replace="@{admin/room/Updateroom.html}"></div>
+		<div id="createModel" th:replace="@{admin/room/Deleteroom.html}"></div>
+	<div id="header" th:replace="@{admin/menu}"></div>
+	<div class="container">
+		<div class="heading">Quản lí</div>
+		<label style="font-size: 24px;font-weight: 600;">Phòng</label>
+		<br>
+		<br>	
+		<button style="padding: 5px; margin-bottom: 1.5%" data-bs-toggle="modal" data-bs-target="#modalRegisterFormCreaRoom">Tạo
+			phòng</button>
+		<table class="table">
+			<thead>
+				<th style="width: 30%;" scope="col">Tên phòng</th>
+				<th style="width: 25%;" scope="col">Loại Phòng</th>
+				<th style="width: 25%;" scope="col">Tình trạng</th>
+				<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="room : ${listroom}" th:object="${room.value}">
+					<td th:text="*{name}"></td>
+					<td th:text="*{typeroom}"></td>
+					<td th:text="*{status}"></td>
+					<td><a th:href="@{|/admin/management/${room.key}?room=*{name}|}" class="btn btn-success">Sửa</a>
+					<a th:href="@{|/admin/management/${room.key}?roomdelete=*{name}|}" class="btn btn-danger">Xóa</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+		<br>
+		<br>
+		<label style="font-size: 24px;font-weight: 600;">Loại phòng</label>
+		<br>
+		<br>
+		<button style="padding: 5px; margin-bottom: 1.5%" data-bs-toggle="modal" data-bs-target="#modalRegisterForm">Tạo
+			phòng</button>
+		<table class="table">
+			<thead>
+				<tr>
+					
+					<th style="width: 30%;" scope="col">Tên Loại Phòng</th>
+					<th style="width: 25%;" scope="col">Giá Loại Phòng</th>
+					<th style="width: 30%;" scope="col">Mô tả</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="type : ${listtype}" th:object="${type.value}">
+					<td th:text="*{name}"></td>
+					<td th:text="*{price}"></td>
+					<td >[(*{description})]</td>
+					<td><a th:href="@{|/admin/management/${type.key}?id=*{name}|}" class="btn btn-success">Sửa</a>
+						<a th:href="@{|/admin/management/${type.key}?iddelete=*{name}|}" class="btn btn-danger">Xóa</a>
+				</tr>
+			</tbody>
+		</table>
+
+<br>
+		<br>
+		<label style="font-size: 24px;font-weight: 600;">Dịch vụ</label>
+		<br>
+		<br>
+		<button style="padding: 5px; margin-bottom: 1.5%" data-bs-toggle="modal" data-bs-target="#modalRegisterFormCreaServ">Tạo
+			dịch vụ mới</button>
+		<table class="table">
+			<thead>
+				<tr>
+					<th style="width: 30%;" scope="col">Tên Dịch Vụ</th>
+					<th style="width: 25%;" scope="col">Giá Loại Phòng</th>
+					<th style="width: 30%;" scope="col">Người tạo</th>
+					<th style="width: 30%;" scope="col">Ngày tạo</th>
+					<th style="width: 25%;" scope="col">Mô tả</th>
+					<th style="width: 30%;" scope="col">Tình trạng</th>
+					<th style="width: 30%;" scope="col">Hình ảnh</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="serv : ${listserv}" th:object="${serv.value}">
+					<td th:text="*{name}"></td>
+					<td th:text="*{price}"></td>
+					<td th:text="*{usercreated}"></td>
+					<td th:text="*{datecreated}"></td>
+					<td>[(*{description})]</td>
+					<td th:text="*{status}"></td>
+					<td><img th:src="*{image}" > </td>
+					<td><a th:href="@{|/admin/management/${serv.key}?service=*{name}|}" class="btn btn-success">Sửa</a>
+						<a th:href="@{|/admin/management/${serv.key}?servicedelete=*{name}|}" class="btn btn-danger">Xóa</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="footer" th:replace="@{user/footer}"></div>
+</body>
+
+</html>

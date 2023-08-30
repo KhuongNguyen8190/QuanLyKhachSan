@@ -1,0 +1,15 @@
+<!-- The Modal -->
+<form>
+	<!-- Modal body -->
+	<div class="modal-body">
+		<p>Xác nhận đã dọn phòng</p>
+	</div>
+	<!-- Modal footer -->
+	<div class="modal-footer">
+		<button th:formaction="@{|/admin/orders/clean-room/${idRoom}|}"
+			class="btn btn-success">Xác nhận</button>
+		<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+	</div>
+</form>
+
+

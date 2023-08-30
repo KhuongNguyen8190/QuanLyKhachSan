@@ -1,0 +1,25 @@
+.container {
+    margin-top: 100px;
+}
+
+.container form {
+    width: 500px;
+    margin: 0 auto;
+    margin-bottom: 20px;
+}
+
+.container form .mb-3 {
+    display: flex;
+    justify-content: space-between;
+}
+
+.container form .mb-3 input[type="text"] {
+	width: 60%;
+}
+
+.heading {
+    font-size: 30px;
+    color: blue;
+    text-align: center;
+    margin-bottom: 10px;
+}

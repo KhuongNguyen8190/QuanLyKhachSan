@@ -1,0 +1,56 @@
+<!-- The Modal -->
+<form th:object="${order}">
+	<div class="modal-header" xmlns="http://www.w3.org/1999/xhtml"
+		xmlns:th="http://www.thymeleaf.org">
+		<button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+	</div>
+	<!-- Modal body -->
+	<div class="modal-body">
+		<div class="row">
+			<div>
+				<h4 class="modal-title">Mở phòng</h4>
+				<p>
+					Ngày nhận phòng:<b style="margin-left: 10px;"></b>
+				</p>
+			</div>
+		</div>
+		<div>
+			<div class="row">
+				<h4>Thông tin khác hàng</h4>
+				<div class="col">
+					<div class="form-group" hidden="true">
+						<label for="name">Tên khách hàng: </label> <input
+							th:value="${keyOrder}" id="keyOrder" class="form-group-item" />
+					</div>
+					<div class="form-group">
+						<label for="name">Tên khách hàng: </label> <input
+							th:field="${customer.name}" class="form-group-item" />
+					</div>
+					<div class="form-group">
+						<label for="phone">Số điện thoại: </label> <input
+							th:field="${customer.phone}" class="form-group-item" />
+					</div>
+
+				</div>
+				<div class="col">
+					<div class="form-group">
+						<label for="CCCD"> CCCD/CMND: </label> <input
+							th:field="${customer.CCCD}" class="form-group-item" />
+					</div>
+					<div class="form-group">
+						<label for="numberPeople"> Số người: </label> <input
+							th:field="*{numberPeople}" class="form-group-item" />
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<!-- Modal footer -->
+	<div class="modal-footer">
+		<button th:formaction="@{|/admin/orders/create/${id}|}"
+			class="btn btn-success">Mở phòng</button>
+		<button type="button" class="btn btn-danger" data-bs-dismiss="modal">Đóng</button>
+	</div>
+</form>
+
+

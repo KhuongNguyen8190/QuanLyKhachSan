@@ -1,0 +1,299 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
+nav {
+	background-color: white;
+	min-height: 70px;
+	box-shadow: 0px 1px 4px lightgrey;
+	position: fixed;
+	width: 100%;
+	top: 0;
+	z-index: 999;
+}
+
+nav {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+nav .logo {
+	font-size: 30px;
+	font-weight: bold;
+	margin-left: 30px;
+	color: black;
+	text-decoration: none;
+	filter: drop-shadow(2px 2px 0px red);
+	transition: all .5s ease;
+}
+
+nav .logo:hover {
+	color: black;
+}
+
+nav .menu li {
+	list-style: none;
+	margin: 0 10px;
+	color: black;
+}
+
+nav .menu a {
+	color: black;
+	text-decoration: none;
+	position: relative;
+}
+
+nav .menu a::before {
+	position: absolute;
+	content: "";
+	width: 0%;
+	height: 2px;
+	bottom: 0;
+	left: 0;
+	background-color: black;
+}
+
+nav .menu a:hover::before {
+	width: 100%;
+	transition: all .5s ease;
+}
+
+nav .menu {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin: 0;
+}
+
+nav .contact {
+	display: flex;
+	margin-right: 20px;
+	align-items: center;
+}
+
+nav .contact a {
+	background-color: orange;
+	cursor: pointer;
+	width: 100px;
+	text-align: center;
+	padding: 5px 3px;
+	border-radius: 5px;
+	border: none;
+	outline: none;
+	margin: 0 5px;
+	transition: all .5s ease;
+	color: white;
+}
+
+nav .contact ul {
+	margin-bottom: 0px;
+}
+
+nav .contact ul li.menu-item {
+	position: relative;
+	list-style: none;
+	padding: 10px 5px;
+	transition: all .5s ease;
+}
+
+nav .contact ul li.menu-item:hover {
+	color: lightgrey;
+	transition: all .5s ease;
+}
+
+nav .contact ul li.menu-item:hover .sub-menu {
+	pointer-events: auto;
+	opacity: 1;
+	transform: translateY(0px);
+	transition: opacity .5s, transform .5s;
+}
+
+nav .contact .sub-menu {
+	pointer-events: none;
+	opacity: 0;
+	position: absolute;
+	left: 0;
+	top: 100%;
+	padding: 0;
+	transform: translateY(30px);
+	background-color: white;
+	box-shadow: 0 0 10px black;
+	width: 200px;
+	border-radius: 5px;
+	transition: opacity 0.3s, transform 0.3s;
+	opacity: 0;
+}
+
+nav .contact .sub-menu li {
+	list-style: none;
+	padding: 10px 20px;
+}
+
+nav .contact .sub-menu li:first-child:hover {
+	border-top-left-radius: 5px;
+	border-top-right-radius: 5px;
+}
+
+nav .contact .sub-menu li:last-child:hover {
+	border-bottom-left-radius: 5px;
+	border-bottom-right-radius: 5px;
+}
+
+nav .contact .sub-menu .sub-menu-item:hover {
+	background-color: lightgrey;
+	transition: all .5s ease;
+}
+
+nav .contact .sub-menu .sub-menu-item:hover a {
+	color: white;
+}
+
+nav .contact .sub-menu a {
+	background-color: transparent !important;
+	text-decoration: none;
+	color: black;
+	width: 100%;
+}
+
+nav .contact .info-user {
+	background-color: transparent !important;
+	color: black;
+	text-decoration: none;
+}
+
+nav .contact .info-user:hover {
+	color: grey;
+}
+
+nav .contact a:hover {
+	background: orangered;
+	color: white;
+}
+
+nav .bx-list-ul {
+	display: none;
+	cursor: pointer;
+	font-size: 30px;
+	margin-right: 10px;
+}
+
+nav .menu.active {
+	display: block;
+	position: absolute;
+	width: 100%;
+	left: 0;
+	top: 70px;
+	height: auto;
+	margin: 0;
+	opacity: 1;
+	visibility: visible;
+	background-color: white;
+	padding: 0;
+	transition: all .5s ease;
+	box-shadow: 0 0 3px grey;
+}
+
+nav .menu.active li a {
+	width: 100%;
+	position: absolute;
+	top: 50%;
+	transform: translateY(-50%);
+}
+
+nav .menu.active li {
+	margin: 0;
+	padding: 20px 10px;
+	cursor: pointer;
+	position: relative;
+}
+
+nav .menu.active li:hover a {
+	color: white;
+}
+
+nav .menu.active a:hover::before {
+	display: none;
+}
+
+nav .menu.active li:hover {
+	background-color: lightgrey;
+}
+
+@media screen and (max-width: 880px) {
+	nav .menu {
+		position: absolute;
+		opacity: 0;
+		visibility: hidden;
+		display: none;
+		transition: all .5s ease;
+	}
+	nav .bx-list-ul {
+		display: block;
+	}
+}
+
+@media screen and (max-width:1062px) {
+	nav .menu {
+		margin-left: 100px;
+	}
+	nav .contact ul {
+		padding: 0;
+	}
+}
+
+@media screen and (max-width:962px) {
+	nav .menu {
+		margin-left: 50px;
+	}
+}
+
+@media screen and (max-width:912px) {
+	nav .menu {
+		padding: 0;
+	}
+}
+
+@media screen and (max-width:556px) {
+	nav .menu {
+		display: none;
+	}
+	nav .logo {
+		margin-left: 5px;
+	}
+	nav .contact ul {
+		padding: 0;
+	}
+}
+
+#loading-container {
+	position: fixed;
+	opacity: 0;
+	visibility: hidden;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background-color: white;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	z-index: 9999;
+}
+
+#loading-container i {
+	color: red;
+	font-size: 40px;
+	animation: scroll 2s infinite;
+}
+
+@keyframes scroll { 100% {
+	transform: rotate(360deg);
+}
+
+}
+a {
+	cursor: pointer;
+}

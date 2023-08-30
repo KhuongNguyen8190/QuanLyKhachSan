@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+	<head>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<title>Document</title>
+		<link rel="stylesheet" href="/css/order-history.css">
+	</head>
+	<body>
+		<div id="header" th:replace="@{user/menu}"></div>
+		<div class="content">
+			<div class="heading">Thông Tin Phòng</div>
+			<ul class="nav nav-tabs" id="myTab" role="tablist">
+				<li class="nav-item" role="presentation">
+					<button class="nav-link active" id="home-tab" data-bs-toggle="tab"
+						data-bs-target="#home" type="button" role="tab"
+						aria-controls="home" aria-selected="true">Đã Đặt</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="profile-tab" data-bs-toggle="tab"
+						data-bs-target="#profile" type="button" role="tab"
+						aria-controls="profile" aria-selected="false">Đã Thanh Toán</button>
+				</li>
+				<li class="nav-item" role="presentation">
+					<button class="nav-link" id="contact-tab" data-bs-toggle="tab"
+						data-bs-target="#contact" type="button" role="tab"
+						aria-controls="contact" aria-selected="false">Đã Hủy</button>
+				</li>
+			</ul>
+			<div class="tab-content" id="myTabContent">
+				<div class="tab-pane fade show active" id="home" role="tabpanel"
+					aria-labelledby="home-tab">
+					<table class="table table-striped">
+						<tr>
+							<th>Ngày Đặt</th>
+							<th>Loại Phòng</th>
+							<th>Ngày Nhận Phòng</th>
+							<th>Ngày Trả Phòng</th>
+							<th>Giá Phòng</th>
+							<th></th>
+						</tr>
+						<tr>
+							<td>19/07/2023</td>
+							<td>VIP</td>
+							<td>21/07/2023</td>
+							<td>25/07/2023</td>
+							<td>1234567đ</td>
+							<td><a href="#" class="btn btn-success">Thanh Toán</a><a href="#"
+									class="btn btn-danger">Hủy Phòng</a></td>
+						</tr>
+						<tr>
+							<td>19/07/2023</td>
+							<td>VIP</td>
+							<td>21/07/2023</td>
+							<td>25/07/2023</td>
+							<td>1234567đ</td>
+							<td><a href="#" class="btn btn-success">Thanh Toán</a><a href="#"
+									class="btn btn-danger">Hủy Phòng</a></td>
+						</tr>
+						<tr>
+							<td>19/07/2023</td>
+							<td>VIP</td>
+							<td>21/07/2023</td>
+							<td>25/07/2023</td>
+							<td>1234567đ</td>
+							<td><a href="#" class="btn btn-success">Thanh Toán</a><a href="#"
+									class="btn btn-danger">Hủy Phòng</a></td>
+						</tr>
+						<tr>
+							<td>19/07/2023</td>
+							<td>VIP</td>
+							<td>21/07/2023</td>
+							<td>25/07/2023</td>
+							<td>1234567đ</td>
+							<td><a href="#" class="btn btn-success">Thanh Toán</a><a href="#"
+									class="btn btn-danger">Hủy Phòng</a></td>
+						</tr>
+						<tr>
+							<td>19/07/2023</td>
+							<td>VIP</td>
+							<td>21/07/2023</td>
+							<td>25/07/2023</td>
+							<td>1234567đ</td>
+							<td><a href="#" class="btn btn-success">Thanh Toán</a><a href="#"
+									class="btn btn-danger">Hủy Phòng</a></td>
+						</tr>
+						<tr>
+							<td>19/07/2023</td>
+							<td>VIP</td>
+							<td>21/07/2023</td>
+							<td>25/07/2023</td>
+							<td>1234567đ</td>
+							<td><a href="#" class="btn btn-success">Thanh Toán</a><a href="#"
+									class="btn btn-danger">Hủy Phòng</a></td>
+						</tr>
+					</table>
+				</div>
+				<div class="tab-pane fade" id="profile" role="tabpanel"
+					aria-labelledby="profile-tab">
+					<table class="table table-striped">
+						<tr>
+							<th>Ngày Đặt</th>
+							<th>Loại Phòng</th>
+							<th>Ngày Nhận Phòng</th>
+							<th>Ngày Trả Phòng</th>
+							<th>Giá Phòng</th>
+						</tr>
+						<tr>
+							<td>19/07/2023</td>
+							<td>VIP</td>
+							<td>21/07/2023</td>
+							<td>25/07/2023</td>
+							<td>1234567đ</td>
+						</tr>
+					</table>
+				</div>
+				<div class="tab-pane fade" id="contact" role="tabpanel"
+					aria-labelledby="contact-tab">
+					<table class="table table-striped">
+						<tr>
+							<th>Ngày Đặt</th>
+							<th>Loại Phòng</th>
+							<th>Ngày Nhận Phòng</th>
+							<th>Ngày Trả Phòng</th>
+							<th>Giá Phòng</th>
+							<th></th>
+						</tr>
+						<tr>
+							<td>19/07/2023</td>
+							<td>VIP</td>
+							<td>21/07/2023</td>
+							<td>25/07/2023</td>
+							<td>1234567đ</td>
+							<td><a href="#" class="btn btn-primary">Đặt Lại</a></td>
+						</tr>
+					</table></div>
+			</div>
+		</div>
+		<div id="footer" th:replace="@{user/footer}"></div>
+	</body>
+</html>

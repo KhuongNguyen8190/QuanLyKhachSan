@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <link
+        href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css"
+        rel="stylesheet"
+        integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC"
+        crossorigin="anonymous">
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"
+        integrity="sha384-IQsoLXl5PILFhosVNubq5LC7Qb9DXgDA9i+tQ8Zj3iwWAwPtgFTxbJ8NT4GN1R8p"
+        crossorigin="anonymous"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.min.js"
+        integrity="sha384-cVKIPhGWiC2Al4u+LWgxfKTRIcfu0JTxR+EQDz/bgldoEyl4H0zUF0QKbrJ0EcQF"
+        crossorigin="anonymous"></script>
+    <link rel="stylesheet"
+        href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css'
+        rel='stylesheet'>
+    <link rel="stylesheet" href="/css/inforoom.css">
+    <body>
+        <div id="header" th:replace="@{user/menu}"></div>
+        <div class="heading">thông tin phòng:</div>
+        <div class="info-room">
+            <div class="image-room">
+                <img src="/images/noi-that-khach-san-5-sao-2.jpg" alt>
+            </div>
+            <ul class="about-room">
+                <li class="type">Loại phòng: VIP
+                    <ul class="menu convenient">
+                        <li class="menu-item">Phòng giường đôi</li>
+                        <li class="menu-item">Có phòng tắm riêng</li>
+                    </ul>
+                </li>
+                <li class="price">Giá phòng: 7,000,000đ</li>
+                <li class="quantity">Số lượng người ở: 1-2 người</li>
+                <li class="acreage">Diện tích: 20m<sup>2</sup></li>
+                <li>Tiện nghi:
+                    <ul class="menu convenient">
+                        <li class="menu-item">Máy sấy tóc</li>
+                        <li class="menu-item">Lược chảy tóc</li>
+                        <li class="menu-item">Tủ lạnh mini</li>
+                        <li class="menu-item">Điện thoại</li>
+                        <li class="menu-item">TV</li>
+                        <li class="menu-item">Khăn tắm</li>
+                    </ul>
+                </li>
+                <li class="wifi">MIỄN PHÍ WIFI</li>
+                <li class="note">PHÒNG KHÔNG HÚT THUỐC</li>
+            </ul>
+            <div class="order">
+                <div class="check-in">
+                    <label for="check-in">Ngày Nhận Phòng:</label>
+                    <input type="date" id="check-in" name="date" class="date-input">
+                </div>
+                <div class="check-out mt-3">
+                    <label for="check-out">Ngày Trả Phòng:</label>
+                    <input type="date" id="check-out" name="date" class="date-input">
+                </div>
+                <div class="phone mt-3">
+                    <label for="phone">Số điện thoại:</label>
+                    <input type="text" id="phone" name="date" class="date-input" placeholder="Số điện thoại">
+                </div>
+                <button type="submit" id="order-room" class="mt-3">Đặt Phòng</button>
+            </div>
+        </div>
+        <div id="footer" th:replace="@{user/footer}"></div>
+    </body>
+</html>

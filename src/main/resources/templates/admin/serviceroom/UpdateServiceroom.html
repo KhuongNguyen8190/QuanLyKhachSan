@@ -1,0 +1,89 @@
+<script type="text/javascript">
+	function ValidateUpdateServ() {
+		var name = document.frmUpdateServ.name.value;
+		var price = document.frmUpdateServ.price.value;
+		var des = document.frmUpdateServ.description.value;
+		var image = document.frmUpdateServ.image.value;
+		if (name == "") {
+			document.getElementById("errnameupdateserv").innerHTML = "Tên không được để trống"
+			return false;
+		} else if (price == "") {
+			document.getElementById("errpriceupdateserv").innerHTML = "Giá không được để trống"
+			return false;
+		} else if (des == '') {
+			document.getElementById("errdesupdateserv").innerHTML = "Mô tả không được để trống"
+			return false;
+		} else if (image == '') {
+			document.getElementById("errimageupdateserv").innerHTML = "Hình ảnh không được để trống"
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
+<div class="modal fade" id="modalRegisterFormupdateServ" tabindex="-1" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<h4 class="modal-title w-100 font-weight-bold">Cập nhật dịch vụ</h4>
+			</div>
+			<form th:object="${servfind}" method="post"  name="frmUpdateServ"
+				onsubmit="return ValidateUpdateServ()">
+				<div class="mb-3">
+					<label for="fullname">Tên dịch vụ:</label> <input type="text" id="fullname" th:field="*{name}">
+				</div>
+				<span id="errnameupdateserv" style="color: red"></span>
+				<div class="mb-3">
+					<label for="price">Giá dịch vụ:</label> <input type="text" id="price" th:field="*{price}">
+				</div>
+				<span id="errpriceupdateserv" style="color: red"></span>
+				<div class="mb-3">
+					<label for="price">Tình trạng:</label> <input type="text" id="price" th:field="*{status}">
+				</div>
+				<div class="mb-3">
+					<label for="price">Mô tả:</label><textarea id="motaservupdate" th:field="*{description}" />
+				</div>
+				<span id="errdesupdateserv" style="color: red"></span>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Image</label> <input type="file" class="form-control"
+						id="inputImageup" aria-describedby="emailHelp" name="role"> <input type="hidden" id="srcImgup"
+						th:field="*{image}"></input> <img style="width: 150px" th:src="*{image}" id="imgloadup">
+				</div>
+				<span id="errimageupdateserv" style="color: red"></span>
+				<button type="submit" class="btn btn-success"
+					th:formaction="@{|/updateServiceroom/${key}|}">Lưu</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+	window.addEventListener("load", function () {
+		let params = new URLSearchParams(window.location.search);
+		var paramID = params.get("service");
+		if (paramID != null) {
+			$('#modalRegisterFormupdateServ').modal('show');
+		}
+	})
+</script>
+<script>
+	document.querySelector("#inputImageup").addEventListener("change", readFile);
+	function readFile() {
+		const FR = new FileReader();
+		FR.addEventListener("load", function (evt) {
+			document.querySelector("#imgloadup").src = evt.target.result;
+			document.querySelector("#srcImgup").value = evt.target.result;
+			/* alert(document.querySelector("#srcImg").value); */
+		});
+		FR.readAsDataURL(this.files[0]);
+	}
+</script>
+<script>ClassicEditor
+		.create(document.querySelector('#motaservupdate'))
+		.then(testmota => {
+			document.querySelector("#motaservupdate").value = testmota;
+		})
+		.catch(error => {
+			console.error(error);
+		});</script>

@@ -1,0 +1,92 @@
+<script type="text/javascript">
+	function ValidateCreateType() {
+		var name = document.frmCreateType.name.value;
+		var price = document.frmCreateType.price.value;
+		var des = document.frmCreateType.description.value;
+		if (name == '') {
+			document.getElementById("errnameCreateType").innerHTML = "Tên không được để trống"
+			return false;
+		} else if (price == '') {
+			document.getElementById("errpriceCreateType").innerHTML = "Giá không được để trống"
+			return false;
+		} else if (des == '') {
+			document.getElementById("errdescCreateType").innerHTML = "Mô tả không được để trống"
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
+<div class="modal fade" id="modalRegisterForm" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<h4 class="modal-title w-100 font-weight-bold">Tạo loại phòng mới</h4>
+			</div>
+			<form th:object="${typefind}" enctype="multipart/form-data" name="frmCreateType"
+				onsubmit="return ValidateCreateType()" method="post">
+				<div class="mb-3">
+					<label for="fullname">Tên Loại Phòng:</label> <input type="text" id="fullname" th:field="*{name}"
+						placeholder>
+				</div>
+				<span id="errnameCreateType" style="color: red"></span>
+				<div class="mb-3">
+					<label for="price">Giá Loại Phòng:</label> <input type="text" id="price" th:field="*{price}"
+						placeholder>
+				</div>
+				<span id="errpriceCreateType" style="color: red"></span>
+				<div class="mb-3">
+					<label for="price">Mô tả:</label>
+					<textarea id="motatypecreate" th:field="*{description}" />
+				</div>
+				<span id="errdescCreateType" style="color: red"></span>
+				<div class="mb-3">
+					<label class="btn btn-primary" for="imageInput">Chọn
+						Ảnh</label>
+				</div>
+				<div class="mb-3">
+					<p id="selectedImageCount">Số ảnh đã chọn: 0</p>
+				</div>
+				<input type="file" name="images" id="imageInput" accept="image/*" multiple style="display: none"
+					onchange="countSelectedImagesCreate()">
+
+				<button type="submit" class="btn btn-success" th:formaction="@{|/createTyperoom|}">Lưu</button>
+			</form>
+		</div>
+	</div>
+</div>
+
+<script>
+	ClassicEditor
+		.create(document.querySelector('#motatypecreate'))
+		.then(testmota => {
+			document.querySelector("#motatypecreate").value = testmota;
+		})
+		.catch(error => {
+			console.error(error);
+		});
+
+	function countSelectedImagesCreate() {
+		const inputElement = document.getElementById('imageInput');
+		const selectedImageCountElement = document.getElementById('selectedImageCount');
+		if (inputElement.files && inputElement.files.length > 0) {
+			const selectedImageCount = inputElement.files.length;
+			selectedImageCountElement.textContent = `Số ảnh đã chọn: ${selectedImageCount}`;
+			// Chuyển đổi từng hình ảnh thành chuỗi Base64
+			for (let i = 0; i < selectedImageCount; i++) {
+				const imageFile = inputElement.files[i];
+				const reader = new FileReader();
+
+				reader.onload = function (event) {
+					const base64String = event.target.result.split(',')[1];
+					console.log(`Hình ảnh ${i + 1} - Base64: ${base64String}`);
+				};
+
+				reader.readAsDataURL(imageFile);
+			}
+		} else {
+			selectedImageCountElement.textContent = "Không có ảnh nào được chọn.";
+		}
+
+	}
+</script>

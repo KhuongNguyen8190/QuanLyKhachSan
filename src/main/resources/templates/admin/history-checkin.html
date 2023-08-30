@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="/css/admin/customer.css">
+</head>
+<body>
+	<div id="header" th:replace="@{admin/menu}"></div>
+	<div class="container">
+		<div class="heading">Lịch Sử Đặt Phòng</div>
+		<table class="table">
+			<thead>
+				<tr>
+					<th scope="col">Tên Khách Hàng</th>
+					<th scope="col">Loại Phòng</th>
+					<th scope="col" style="width: 7%">Phòng</th>
+					<th scope="col">Thời Gian Đặt</th>
+					<th scope="col">Thời Gian Nhận Phòng</th>
+					<th scope="col">Thời Gian Trả Phòng</th>
+					<th scope="col" style="width: 10%">Status</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr th:each="history : ${historyCheckin}">
+					<td scope="col" th:text="${history[10]}"></td>
+					<td scope="col" th:text="${history[4]}"></td>
+					<td scope="col" th:text="${history[5]}" style="width: 7%"></td>
+					<td scope="col" th:text="${history[1]}"></td>
+					<td scope="col" th:text="${history[2]}"></td>
+					<td scope="col" th:text="${history[3]}"></td>
+					<td scope="col"
+						th:with="colorClass=${history[8] == '1' ? 'blue' : history[8] == '0' ? 'red' : 'green'}"
+						th:style="'color:' + ${colorClass} + '; width: 10%'"
+						th:text="${history[8]}"></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+</body>
+</html>

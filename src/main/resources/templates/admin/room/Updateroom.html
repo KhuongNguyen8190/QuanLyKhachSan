@@ -1,0 +1,48 @@
+<div class="modal fade" id="modalRegisterFormupdateroom" tabindex="-1" aria-labelledby="myModalLabel"
+	aria-hidden="true">
+	<div class="modal-dialog" role="document">
+		<div class="modal-content">
+			<div class="modal-header text-center">
+				<h4 class="modal-title w-100 font-weight-bold">Cập nhật phòng</h4>
+			</div>
+			<form th:object="${roomfind}" method="post" name="frmUpdateRoom" onsubmit="return ValidateUpdateRoom()">
+				<div class="mb-3">
+					<label for="fullname">Tên phòng:</label> <input type="text" name id="fullname" th:field="*{name}">
+				</div>
+				<span id="errnameUpdateroom" style="color: red"></span>
+				<div class="mb-3">
+					<label for="price">Loại phòng:</label>
+					<select id="lang-select" th:field="*{typeroom}">
+						<option th:each="i:${listtype}" th:value="${i.key}" th:text="${i.value.name}"></option>
+					</select>
+				</div>
+				<div class="mb-3">
+					<label for="price">Tình trạng:</label>
+					<input type="text" name id="fullname" th:field="*{status}" placeholder>
+				</div>
+				<button type="submit" class="btn btn-success" th:formaction="@{|/updateRoom/${key}|}">Lưu</button>
+			</form>
+		</div>
+	</div>
+</div>
+<script>
+	window.addEventListener("load", function () {
+		let params = new URLSearchParams(window.location.search);
+		var paramID = params.get("room");
+		if (paramID != null) {
+			$('#modalRegisterFormupdateroom').modal('show');
+		}
+	})
+
+</script>
+<script type="text/javascript">
+	function ValidateUpdateRoom() {
+		var name = document.frmUpdateRoom.name.value;
+		if (name == '') {
+			document.getElementById("errnameUpdateroom").innerHTML = "Tên không được để trống"
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="/css/admin/type-room.css">
+	<style>
+		span {
+			color: red;
+
+		}
+	</style>
+	<script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
+</head>
+
+<body>
+	<div class="modal fade" id="modalRegisterFormCreaServ" tabindex="-1" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<h4 class="modal-title w-100 font-weight-bold">Tạo dịch vụ mới</h4>
+				</div>
+				<form th:object="${servfind}" method="post">
+
+					<div class="mb-3">
+						<label for="fullname">Tên dịch vụ:</label> <input type="text" name id="fullname"
+							th:field="*{name}" placeholder>
+						<span th:errors="*{name}" />
+
+					</div>
+					<div class="mb-3">
+						<label for="price">Giá dịch vụ:</label> <input type="text" name id="price" th:field="*{price}"
+							placeholder>
+						<span th:errors="*{price}" />
+					</div>
+					<div class="mb-3">
+						<label for="price">Mô tả:</label> <textarea id="motaservcreate" th:field="*{description}" />
+					</div>
+					<div class="form-group">
+						<label for="exampleInputEmail1">Image</label> <input
+							type="file" class="form-control" id="inputImage"
+							aria-describedby="emailHelp" name="role" required> <input
+							type="hidden" id="srcImg" th:field="*{image}"></input> <img
+							style="width: 150px" src="" id="imgload">
+
+					</div>
+					<button class="btn btn-deep-orange" data-dismiss="modal">Hủy bỏ</button>
+					<button type="submit" class="btn btn-success" th:formaction="@{|/createServiceroom|}">Lưu</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		ClassicEditor
+			.create(document.querySelector('#motaservcreate'))
+			.then(testmota => {
+				document.querySelector("#motaservcreate").value = testmota;
+			})
+			.catch(error => {
+				console.error(error);
+			});
+	</script>
+	<script>
+	document.querySelector("#inputImage").addEventListener("change", readFile);
+
+	function readFile() {
+		const FR = new FileReader();
+		FR.addEventListener("load", function(evt) {
+			document.querySelector("#imgload").src = evt.target.result;
+			document.querySelector("#srcImg").value = evt.target.result;
+			/* alert(document.querySelector("#srcImg").value); */
+		});
+		FR.readAsDataURL(this.files[0]);
+	}
+	
+</script>
+</body>
+
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="/css/order-history.css">
+</head>
+
+<body>
+	<div id="header" th:replace="@{user/menu}"></div>
+	<div class="content">
+		<div class="heading">Thông Tin Phòng</div>
+		<ul class="nav nav-tabs" id="myTab" role="tablist">
+			<li class="nav-item" role="presentation">
+				<button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button"
+					role="tab" aria-controls="home" aria-selected="true">Đã Đặt</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="profile-tab" data-bs-toggle="tab" data-bs-target="#profile" type="button"
+					role="tab" aria-controls="profile" aria-selected="false">Đang Ở</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="daO-tab" data-bs-toggle="tab" data-bs-target="#daO" type="button"
+					role="tab" aria-controls="daO" aria-selected="false">Đã Ở</button>
+			</li>
+			<li class="nav-item" role="presentation">
+				<button class="nav-link" id="contact-tab" data-bs-toggle="tab" data-bs-target="#contact" type="button"
+					role="tab" aria-controls="contact" aria-selected="false">Đã Hủy Phòng</button>
+			</li>
+		</ul>
+		<div class="tab-content" id="myTabContent">
+			<div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+				<table class="table table-striped">
+					<tr>
+						<th>Ngày Đặt</th>
+						<th>Ngày Nhận Phòng</th>
+						<th>Ngày Trả Phòng</th>
+						<th>Loại Phòng</th>
+						<th>Mã Phòng</th>
+						<th>Giá Phòng</th>
+						<th></th>
+					</tr>
+					<tbody>
+						<tr th:each="room : ${listRoom}" th:if="${room[8] == '1'}">
+							<td th:text="${room[1]}"></td>
+							<td th:text="${room[2]}"></td>
+							<td th:text="${room[3]}"></td>
+							<td th:text="${room[4]}"></td>
+							<td th:text="${room[5]}"></td>
+							<td th:text="${room[6]}"></td>
+							<td><a th:id="${room[0]}" class="btn btn-danger cancel-room" th:value="${room[0]}">Hủy
+									Phòng</a></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="tab-pane fade" id="profile" role="tabpanel" aria-labelledby="profile-tab">
+				<table class="table table-striped">
+					<tr>
+						<th>Ngày Đặt</th>
+						<th>Ngày Nhận Phòng</th>
+						<th>Ngày Trả Phòng</th>
+						<th>Loại Phòng</th>
+						<th>Mã Phòng</th>
+						<th>Giá Phòng</th>
+					</tr>
+					<tbody>
+						<tr th:each="room : ${listRoom}" th:if="${room[8] == '2'}">
+							<td th:text="${room[1]}"></td>
+							<td th:text="${room[2]}"></td>
+							<td th:text="${room[3]}"></td>
+							<td th:text="${room[4]}"></td>
+							<td th:text="${room[5]}"></td>
+							<td th:text="${room[6]}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="tab-pane fade" id="daO" role="tabpanel" aria-labelledby="daO-tab">
+				<table class="table table-striped">
+					<tr>
+						<th>Ngày Đặt</th>
+						<th>Ngày Nhận Phòng</th>
+						<th>Ngày Trả Phòng</th>
+						<th>Loại Phòng</th>
+						<th>Mã Phòng</th>
+						<th>Giá Phòng</th>
+					</tr>
+					<tbody>
+						<tr th:each="room : ${listRoomDaO}">
+							<td th:text="${room[1]}"></td>
+							<td th:text="${room[2]}"></td>
+							<td th:text="${room[3]}"></td>
+							<td th:text="${room[4]}"></td>
+							<td th:text="${room[5]}"></td>
+							<td th:text="${room[6]}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+			<div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+				<table class="table table-striped">
+					<tr>
+						<th>Ngày Đặt</th>
+						<th>Ngày Nhận Phòng</th>
+						<th>Ngày Trả Phòng</th>
+						<th>Loại Phòng</th>
+						<th>Mã Phòng</th>
+						<th>Giá Phòng</th>
+						<th>Ngày Hủy Phòng</th>
+					</tr>
+					<tbody>
+						<tr th:each="room : ${listRoom}" th:if="${room[8] == '0'}">
+							<td th:text="${room[1]}"></td>
+							<td th:text="${room[2]}"></td>
+							<td th:text="${room[3]}"></td>
+							<td th:text="${room[4]}"></td>
+							<td th:text="${room[5]}"></td>
+							<td th:text="${room[6]}"></td>
+							<td th:text="${room[9]}"></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+	<div id="footer" th:replace="@{user/footer}"></div>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$(".cancel-room").click(function () {
+				var roomId = $(this).attr("value");
+				$.ajax({
+					url: "/user/cancelRoom/" + roomId,
+					type: "POST",
+					success: function (response) {
+						if (response.success === true) {
+							thongBao('Thông Báo!', response.message, 'success', true);
+						} else {
+							thongBao('Thông Báo!', response.message, 'error', false);
+						}
+					},
+					error: function (xhr) {
+						console.log(xhr.responseText);
+					}
+				});
+			});
+		});
+	</script>
+</body>
+
+</html>

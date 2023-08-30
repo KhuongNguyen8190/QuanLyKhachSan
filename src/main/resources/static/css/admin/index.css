@@ -1,0 +1,138 @@
+.container {
+	margin-top: 100px;
+}
+
+.this-month {
+	display: flex;
+	margin: 10px 0;
+	flex-wrap: wrap;
+	gap: 10px;
+	transition: all .5s ease;
+	text-align: center;
+}
+
+.this-month .card {
+	width: 200px;
+	height: 100px;
+	position: relative;
+	overflow: hidden;
+	border: 1px solid black;
+}
+
+.total i,
+.person i {
+	color: black;
+	font-size: 30px;
+	margin-right: 5px;
+}
+
+.total .circle-top {
+	width: 50%;
+	height: 50%;
+	background: yellow;
+	border-radius: 50%;
+	position: absolute;
+	top: -30px;
+	left: -30px;
+}
+
+.total .circle-bottom {
+	width: 50%;
+	height: 50%;
+	background: green;
+	border-radius: 50%;
+	position: absolute;
+	bottom: -30px;
+	right: -30px;
+}
+
+.user .circle-top {
+	width: 50%;
+	height: 100%;
+	background: yellow;
+	border-radius: 50%;
+	position: absolute;
+	top: 0%;
+	left: -50px;
+}
+
+.user .circle-bottom {
+	width: 100px;
+	height: 100px;
+	background: green;
+	border-radius: 50%;
+	position: absolute;
+	right: 30px;
+	top: 50px;
+}
+
+div.room-none .circle-top {
+	width: 50%;
+	height: 50%;
+	background: yellow;
+	border-radius: 50%;
+	position: absolute;
+	top: 30px;
+	left: 30px;
+}
+
+div.room-none .circle-bottom {
+	width: 50%;
+	height: 50%;
+	background: green;
+	border-radius: 50%;
+	position: absolute;
+	bottom: 20px;
+	right: -30px;
+}
+
+div.room-checked .circle-top {
+	width: 50%;
+	height: 50%;
+	background: yellow;
+	border-radius: 50%;
+	position: absolute;
+	top: 30px;
+	left: -10px;
+}
+
+div.room-checked .circle-bottom {
+	width: 50%;
+	height: 50%;
+	background: green;
+	border-radius: 50%;
+	position: absolute;
+	bottom: 50px;
+	right: -30px;
+}
+
+.heading {
+	font-size: 18px;
+	font-weight: bold;
+	margin-bottom: 10px;
+	color: #333;
+	z-index: 20;
+}
+
+b {
+	font-size: 20px;
+}
+
+.this-month .card div.heading {
+	position: absolute;
+	color: black;
+	font-size: 14px;
+	font-weight: 500;
+	width: 100%;
+	text-align: center;
+	top: 10%;
+}
+
+.this-month .card b {
+	position: absolute;
+	bottom: 5px;
+	left: 5px;
+	font-size: 15px;
+	display: flex;
+	align-items: center;
+}

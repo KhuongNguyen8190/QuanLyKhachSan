@@ -1,0 +1,83 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.info-room {
+    padding-bottom:50px;
+    display: flex;
+    border-bottom: 1px solid lightgrey;
+    justify-content: space-evenly;
+}
+
+.info-room .image-room {
+    width: 50%;
+
+}
+
+.info-room .image-room img {
+    width: 100%;
+}
+
+.info-room .about-room {
+    padding: 0 30px;
+    list-style: decimal;
+}
+
+.info-room .about-room>li {
+    color: red;
+}
+
+.menu.convenient li {
+    list-style: decimal;
+    color: black;
+}
+
+.heading {
+    margin-top: 90px;
+    font-weight: bold;
+    font-variant: small-caps;
+    font-size: 30px;
+    margin-left: 20px;
+}
+
+.date-input {
+    padding: 8px 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 16px;
+}
+
+.info-room .order input {
+    width: 100%;
+}
+
+.info-room .order input:focus {
+    outline: none;
+}
+
+#order-room {
+    padding: 10px 0;
+    width: 100%;
+    outline: none;
+    border: none;
+    background-color: orangered;
+    color: white;
+    border-radius: 5px;
+}
+@media screen and (max-width:1115px) {
+    .info-room{
+        flex-direction: column;
+    }
+    .info-room .image-room{
+        width: 100%;
+        padding: 20px;
+    }
+    .info-room .image-room img{
+        border-radius: 10px;
+    }
+    .info-room .order{
+        padding:10px 20px;
+    }
+}

@@ -1,0 +1,194 @@
+
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+
+<meta charset="UTF-8">
+
+<title>Document</title>
+<link rel="stylesheet" href="/css/admin/index.css">
+<link rel="stylesheet" href="/css/order.css" type="text/css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+<script src="https://code.jquery.com/jquery-3.7.0.js"
+	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/order.css" type="text/css">
+</head>
+<body>
+	<div id="header" th:replace="@{admin/menu}"></div>
+
+
+	<div class="container body-content" style="min-height: 460px">
+		<div class="message" th:if="${session.updateOrder != null}">
+			<div class="alert alert-success">
+				<strong>Sửa thành công!</strong>
+			</div>
+			<th:block th:text="${@sessionService.remove('updateOrder')}"></th:block>
+		</div>
+		<div class="body-content-title">
+			<h1>Phòng đã đặt</h1>
+		</div>
+
+		<!-- The Modal -->
+		<form th:object="${orderRoom}" method="POST"  id="form" style="width: 100% !important; border: 0.5px solid #3333
+			; padding: 30px;
+		"
+			th:action="@{|/admin/orders/update-order-room/${keyRoom}|}">
+			<!-- Modal body -->
+			<div class="modal-body">
+
+				<div>
+					<div class="row">
+
+						<h4>Thông tin phòng</h4>
+						<div class="col">
+							<div th:if="*{status} == '1'" class="form-group">
+								<p>Loại phòng :</p>
+
+								<ul class="nav nav-pills"
+									style="height: 60px; align-items: center; border: 1px solid #3333; padding-left: 10px">
+									<li style="margin-right: 20px;"
+										th:each="typeRoom : ${typeRooms}"
+										th:object="${typeRoom.value}" class="nav-item"><a
+										th:class="nav-link"
+										th:classappend="${keyTR.equals(typeRoom.key)} ? active : ''"
+										th:href="@{|/admin/orders/form-edit-order-room/${keyRoom}?keyTypeRoom=${typeRoom.key}|}">[[${typeRoom.value.name}]]</a></li>
+								</ul>
+								<div class="tab-content">
+									<div class="tab-pane container active"
+										style="margin: 0; padding: 0">
+										<div class="form-group">
+											<label for="name">Danh sách phòng còn trống <i>(nếu
+													bạn muốn đổi phòng)</i></label> <select name="keyRoomNew"
+												class="form-group-item">
+												<option value="">------Chọn Phòng------</option>
+												<option th:each="emptyRoom : ${emptyRooms}"
+													th:oject="${emptyRoom.value}" th:value="${emptyRoom.key}">[[${emptyRoom.value.name}]]</option>
+											</select>
+										</div>
+									</div>
+
+								</div>
+							</div>
+							<div>
+								<p>
+									Phòng đã đặt : <b>[[${room.name}]]</b>
+
+								</p>
+								<i>* nếu bạn không chọn phòng thì sẽ mặc định là phòng
+									[[${room.name}]]</i>
+							</div>
+							<div class="form-group">
+								<p>
+									Loại phòng: <b>[[${nameRoom}]]</b>
+								</p>
+								<p>
+									Giá phòng: <b>[[${priceRoom}]]</b>
+								</p>
+								<p>
+									Ngày đặt: <b>[[${dateAt}]]</b>
+								</p>
+
+							</div>
+
+
+						</div>
+						
+						<div class="col" th:if="*{status} != '1'">
+							<div class="form-group">
+								<label for="CCCD">Ngày nhận phòng</label> <input disabled="disabled"
+									th:value="${dateCheckIn}" name="CheckIn" type="date" 
+									class="form-group-item" /> <span class="form-message">[[${messageErrorCheckIn}]]</span>
+							</div>
+							<div class="form-group">
+								<label for="numberPeople">Ngày trả phòng</label> <input disabled="disabled"
+									th:value="${dateCheckOut}" name="CheckOut" type="date"
+									class="form-group-item" /> <span class="form-message">[[${messageErrorCheckOut}]]</span>
+							</div>
+						</div>
+						<div class="col" th:if="*{status} == '1'">
+							<div class="form-group">
+								<label for="CCCD">Ngày nhận phòng</label> <input 
+									th:value="${dateCheckIn}" name="CheckIn" type="date" 
+									class="form-group-item" /> <span class="form-message">[[${messageErrorCheckIn}]]</span>
+							</div>
+							<div class="form-group">
+								<label for="numberPeople">Ngày trả phòng</label> <input
+									th:value="${dateCheckOut}" name="CheckOut" type="date"
+									class="form-group-item" /> <span class="form-message">[[${messageErrorCheckOut}]]</span>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<h4>Thông tin khác hàng</h4>
+						<div class="col-6">
+							<div class="form-group" hidden="true">
+								<label for="keyRoomOrder"></label> <input type="hidden"
+									name="keyOrderRoom" th:value="${keyOrderRoom}"
+									class="form-group-item" />
+							</div>
+							<div class="form-group">
+								<label for="keyRoom"></label> <input name="keyRoom"
+									type="hidden" th:value="${keyRoom}" class="form-group-item" />
+							</div>
+							<div class="form-group">
+								<label for="name">Tên khách hàng: </label> <input
+									th:field="*{nameCustomer}" class="form-group-item" /> <span
+									th:errors="*{nameCustomer}" class="form-message"></span>
+							</div>
+							<div class="form-group">
+								<label for="phone">Số điện thoại: </label> <input
+									th:field="*{phoneCustomer}" class="form-group-item" /> <span
+									th:errors="*{phoneCustomer}" class="form-message"></span>
+							</div>
+							<div class="form-group">
+								<label for="CCCD">CCCD: </label> <input
+									th:field="*{CCCDCustomer}" class="form-group-item" /> <span
+									class="form-message">[[${messageCCCDCustomer}]]</span>
+							</div>
+
+						</div>
+
+					</div>
+				</div>
+			</div>
+			<!-- Modal footer -->
+			
+			<div th:if="*{status} == '1'" class="modal-footer" style="justify-content: flex-start;">
+				<button name="type" type="submit" value="open" style="width: 102px; margin: 0 6px"
+					class="btn btn-success">Mở phòng</button>
+				<button name="type" type="submit" value="save" style="margin: 0 6px"
+					class="btn btn-primary">Lưu lại</button>
+				<button style="margin: 0 6px"
+					th:formaction="@{|/admin/orders/cancel-order-room/${keyOrderRoom}|}"
+					class="btn btn-warning">Huỷ Đặt</button>
+				<a style="margin: 0 6px" th:href="@{/admin/orders}" class="btn btn-danger">Trở về</a>
+			</div>
+			<div th:if="*{status} != '1'" class="modal-footer" style="justify-content: flex-start;">
+				<a style="margin: 0 6px" th:href="@{/admin/order-room/all-order-room}" class="btn btn-danger">Trở về</a>
+			</div>
+		
+		</form>
+	</div>
+	<div id="footer" th:replace="@{user/footer}"></div>
+</body>
+<script type="text/javascript">
+	const messageTimeOut = setTimeout(closeMessage, 3000)
+
+	function closeMessage() {
+		$('.message').fadeOut();
+	} 
+</script>
+</html>

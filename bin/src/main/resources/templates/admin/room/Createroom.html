@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+
+	
+</head>
+
+<body>
+	<div class="modal fade" id="modalRegisterFormCreaRoom" tabindex="-1" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<h4 class="modal-title w-100 font-weight-bold">Tạo phòng mới</h4>
+				</div>
+				<form th:object="${roomfind}" method="post">
+					<div class="mb-3">
+						<label for="fullname">Tên phòng:</label> <input type="text" name id="fullname"
+							th:field="*{name}" placeholder>
+					</div>
+					<div class="mb-3">
+						<label for="price">Loại phòng:</label>
+						<select id="lang-select" th:field="*{typeroom}">
+								<option th:each="i:${listtype}" th:value="${i.key}" th:text="${i.value.name}"></option>
+						</select>
+					</div>
+					<button class="btn btn-deep-orange" data-dismiss="modal">Hủy bỏ</button>
+					<button type="submit" class="btn btn-success" th:formaction="@{|/createRoom|}">Lưu</button>
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+
+</html>

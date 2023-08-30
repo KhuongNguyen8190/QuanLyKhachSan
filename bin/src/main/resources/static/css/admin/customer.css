@@ -1,0 +1,41 @@
+.container {
+	margin-top: 100px;
+}
+
+.container form {
+	width: 500px;
+	margin: 0 auto;
+	margin-bottom: 20px;
+}
+
+.container form .mb-3:not(:nth-child(3)) {
+	display: flex;
+	justify-content: space-between;
+}
+
+.container form .mb-3 input[type="text"] {
+	width: 60%;
+}
+
+.container form .mb-3:nth-child(3) #male {
+	margin-left: 130px;
+}
+
+.container form .mb-3:nth-child(3) #female {
+	margin-left: 20px;
+}
+
+.container form .mb-3:nth-child(3) input[type="radio"] {
+	margin-right: 5px;
+}
+
+table.table {
+	margin-bottom: 50px;
+}
+
+.heading {
+	font-size: 30px;
+	color: blue;
+	text-align: center;
+	margin-bottom: 10px;
+}

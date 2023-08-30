@@ -1,0 +1,30 @@
+.container {
+	margin-top: 100px;
+}
+
+.this-month {
+	display: flex;
+	justify-content: space-around;
+	margin: 10px 0;
+    flex-wrap: wrap;
+    row-gap: 10px;
+}
+
+.this-month .card {
+	width: 350px;
+	height: 150px;
+    position: relative;
+}
+.this-month .card div.heading{
+    position: absolute;
+    color:blue;
+    font-size: 26px;
+    font-weight: 500;
+    width: 100%;
+    text-align: center;
+}
+.this-month .card b{
+    position: absolute;
+    bottom:5px;
+    left: 5px;
+}

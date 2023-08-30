@@ -1,0 +1,100 @@
+<script type="text/javascript">
+	function ValidateUpdateType() {
+		var name = document.frmUpdateType.name.value;
+		var price = document.frmUpdateType.price.value;
+		var des = document.frmUpdateType.description.value;
+		if (name == '') {
+			document.getElementById("errnameUpdateType").innerHTML = "Tên không được để trống"
+			return false;
+		} else if (price == '') {
+			document.getElementById("errpriceUpdateType").innerHTML = "Giá không được để trống"
+			return false;
+		} else if (des == '') {
+			document.getElementById("errdescUpdateType").innerHTML = "Mô tả không được để trống"
+			return false;
+		} else {
+			return true;
+		}
+	}
+</script>
+	<div class="modal fade" id="modalRegisterFormupdate" tabindex="-1" aria-labelledby="myModalLabel"
+		aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<h4 class="modal-title w-100 font-weight-bold">Cập nhật loại phòng</h4>
+				</div>
+				<form th:object="${typefind}" enctype="multipart/form-data" method="post" name="frmUpdateType" onsubmit="return ValidateUpdateType()">
+					<div class="mb-3">
+						<label for="fullname">Tên Loại Phòng:</label> <input type="text" name id="fullname"
+							th:field="*{name}" >
+					</div>
+					<span id="errnameUpdateType" style="color: red"></span>
+					<div class="mb-3">
+						<label for="price">Giá Loại Phòng:</label> <input type="text" name id="price"
+							th:field="*{price}" > 
+					</div>
+					<span id="errpriceUpdateType" style="color: red"></span>
+					<div class="mb-3">
+						<label for="price">Mô tả:</label>
+						<textarea id="motatypeupdate" th:field="*{description}" />
+					</div>
+					<span id="errdescUpdateType" style="color: red"></span>
+					<div class="mb-3">
+						<label class="btn btn-primary" for="imageInputUpdate">Chọn Ảnh</label>
+					</div>
+					<div class="mb-3">
+						<p id="selectedImageCountUpdate">Số ảnh đã chọn: 0</p>
+					</div>
+					<input type="file" name="imagesUpdate" id="imageInputUpdate" accept="image/*" multiple
+						style="display: none" onchange="countSelectedImages()" >
+					<button type="submit" class="btn btn-success"
+						th:formaction="@{|/updateTyperoom/${key}|}">Lưu</button>
+				</form>
+			</div>
+		</div>
+	</div>
+	<script>
+		ClassicEditor
+			.create(document.querySelector('#motatypeupdate'))
+			.then(testmota => {
+				document.querySelector("#motatypeupdate").value = testmota;
+			})
+			.catch(error => {
+				console.error(error);
+			});
+
+		function countSelectedImages() {
+			const inputElement = document.getElementById('imageInputUpdate');
+			const selectedImageCountElement = document.getElementById('selectedImageCountUpdate');
+			if (inputElement.files && inputElement.files.length > 0) {
+				const selectedImageCount = inputElement.files.length;
+				selectedImageCountElement.textContent = `Số ảnh đã chọn: ${selectedImageCount}`;
+				// Chuyển đổi từng hình ảnh thành chuỗi Base64
+				for (let i = 0; i < selectedImageCount; i++) {
+					const imageFile = inputElement.files[i];
+					const reader = new FileReader();
+
+					reader.onload = function (event) {
+						const base64String = event.target.result.split(',')[1];
+						console.log(`Hình ảnh ${i + 1} - Base64: ${base64String}`);
+					};
+
+					reader.readAsDataURL(imageFile);
+				}
+			} else {
+				selectedImageCountElement.textContent = "Không có ảnh nào được chọn.";
+			}
+
+		}
+	</script>
+	<script>
+		window.addEventListener("load", function () {
+			let params = new URLSearchParams(window.location.search);
+			var paramID = params.get("id");
+			if (paramID != null) {
+				$('#modalRegisterFormupdate').modal('show');
+			}
+		})
+
+	</script>

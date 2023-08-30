@@ -1,0 +1,84 @@
+.content {
+	width: 600px;
+	margin: 0 auto;
+	margin-top: 100px;
+	margin-bottom: 30px;
+	box-shadow: 0 0 5px lightgrey;
+	padding: 20px;
+	border-radius: 5px;
+}
+
+.content .mb-3:not(:nth-child(1)) {
+	display: flex;
+	justify-content: space-between;
+}
+
+.content .mb-3:nth-child(4) {
+	display: block;
+}
+
+.content .mb-3:nth-child(4) #male {
+	margin-left: 100px;
+}
+
+.content .mb-3:nth-child(4) #female {
+	margin-left: 20px;
+}
+
+.content .mb-3 input[type="text"] {
+	padding: 3px 5px;
+	width: 70%;
+	border: 1px solid lightgrey;
+}
+
+.content .mb-3 input[type="text"]:focus {
+	outline: none;
+}
+
+.content .mb-3:nth-child(4) input[type="radio"] {
+	margin-right: 5px;
+}
+
+.content .mb-3:last-child() {
+	display: flex;
+}
+
+#chooseImage {
+	padding: 5px 10px;
+	border: 1px solid blue;
+	color: blue;
+	font-size: 15px;
+	background: transparent;
+}
+
+.content>.heading {
+	text-align: center;
+	font-size: 25px;
+	font-weight: bold;
+	color: blue;
+	margin: 10px 0;
+}
+
+@media screen and (max-width:640px) {
+	.content {
+		width: 400px;
+	}
+	.content .mb-3 input[type="text"] {
+		width: 50% !important;
+	}
+	.content .mb-3:nth-child(3) #male {
+		margin-left: 120px;
+	}
+}
+
+.formImage {
+	text-align: center;
+}
+
+.changeInfo {
+	padding: 5px 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: blue;
+	color: white;
+}

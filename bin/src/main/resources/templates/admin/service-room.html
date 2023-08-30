@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="/css/admin/service-room.css">
+</head>
+<body>
+	<div id="header" th:replace="@{admin/menu}"></div>
+	<div class="container">
+		<div class="heading">Thông Tin Dịch Vụ Phòng</div>
+		<form>
+			<div class="mb-3">
+				<label for="id">Mã Dịch Vụ:</label> <input type="text" name id="id"
+					placeholder>
+			</div>
+			<div class="mb-3">
+				<label for="fullname">Tên Dịch Vụ:</label> <input type="text" name
+					id="fullname" placeholder>
+			</div>
+			<div class="mb-3">
+				<label for="price">Giá Dịch Vụ:</label> <input type="text" name
+					id="price" placeholder>
+			</div>
+			<a href="#" class="btn btn-success">Thêm</a> <a href="#"
+				class="btn btn-primary">Sửa</a> <a href="#" class="btn btn-danger">Xóa</a>
+		</form>
+		<table class="table">
+			<thead>
+				<tr>
+					<th style="width: 25%;" scope="col">Mã Dịch Vụ</th>
+					<th style="width: 30%;" scope="col">Tên Dịch Vụ</th>
+					<th style="width: 25%;" scope="col">Giá Loại Phòng</th>
+					<th scope="col"></th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr>
+					<td>DV113</td>
+					<td>Máy Sấy Tóc</td>
+					<td>125.000đ</td>
+					<td><a href="#" class="btn btn-success">Sửa</a><a href="#"
+						class="btn btn-danger">Xóa</a></td>
+				</tr>
+				<tr>
+					<td>DV113</td>
+					<td>Máy Sấy Tóc</td>
+					<td>125.000đ</td>
+					<td><a href="#" class="btn btn-success">Sửa</a><a href="#"
+						class="btn btn-danger">Xóa</a></td>
+				</tr>
+				<tr>
+					<td>DV113</td>
+					<td>Máy Sấy Tóc</td>
+					<td>125.000đ</td>
+					<td><a href="#" class="btn btn-success">Sửa</a><a href="#"
+						class="btn btn-danger">Xóa</a></td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+	<div id="footer" th:replace="@{user/footer}"></div>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<link rel="stylesheet" href="/css/admin/index.css">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<script
+	src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"
+	integrity="sha256-JlqSTELeR4TLqP0OG9dxM7yDPqX1ox/HfgiSLBj8+kM="
+	crossorigin="anonymous"></script>
+<link rel="stylesheet"
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+	integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw=="
+	crossorigin="anonymous" referrerpolicy="no-referrer" />
+<link rel="stylesheet" href="/css/order.css" type="text/css">
+</head>
+<body>
+	<div id="header" th:replace="@{admin/menu}"></div>
+	<div class="body-content-order">
+		<div class="body-content-title">
+			<h1>Đặt phòng</h1>
+		</div>
+		<!-- The Modal -->
+		<form class="content-order-room"
+			th:action="@{|/admin/orders/create-order-room/${keyRoom}|}"
+			method="POST" th:object="${orderRoom}">
+			<!-- Modal body -->
+			<div class="modal-body">
+				<div>
+					<div class="row">
+						<h4>Thông tin phòng</h4>
+						<div class="col">
+							<div class="form-group">
+								<p>
+									Phòng: <b>[[${room.name}]]</b>
+								</p>
+							</div>
+							<div class="form-group">
+								<p>
+									Loại phòng: <b>[[${nameTypeRoom}]]</b>
+								</p>
+							</div>
+							<div class="form-group">
+								<p>
+									Giá phòng: <b>[[${priceTypeRoom}]]</b>
+								</p>
+							</div>
+						</div>
+						<div class="col" th:object="${date}">
+							<div class="form-group" >
+								<label for="keyTypeRoom">Ngày nhận phòng :</label> <input th:field="*{dateStart}"  readonly="readonly"
+									class="form-group-item" />
+							</div>
+							<div class="form-group">
+								<label for="keyTypeRoom">Ngày Trả phòng :</label> <input  th:field="*{dateEnd}" readonly="readonly"
+									class="form-group-item" />
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<h4>Thông tin khác hàng</h4>
+					<div class="col-6">
+						<div class="form-group" hidden="true">
+							<label for="keyTypeRoom">Loại phòng </label> <input
+								class="form-group-item" />
+						</div>
+						<div class="form-group">
+							<label for="name">Tên khách hàng: </label> <input
+								th:field="*{nameCustomer}" class="form-group-item" /> <span
+								th:errors="*{nameCustomer}" class="form-message"></span>
+						</div>
+						<div class="form-group">
+							<label for="phone">Số điện thoại: </label> <input
+								th:field="*{phoneCustomer}" class="form-group-item" /> <span
+								th:errors="*{phoneCustomer}" class="form-message"></span>
+						</div>
+					</div>
+					<div class="col">
+						<div class="form-group">
+							<label for="numberPeople"> Số người: </label> <input
+								th:field="*{numberPeople}" class="form-group-item" /> <span
+								th:errors="*{numberPeople}" class="form-message"></span>
+						</div>
+					</div>
+				</div>
+
+			</div>
+			<!-- Modal footer -->
+			<div class="modal-footer button-footer">
+				<button class="btn btn-success">Đặt phòng</button>
+				<a th:href="@{/admin/order-room}" class="btn btn-danger">Trở lại
+					tra cứu</a>
+			</div>
+		</form>
+	</div>
+	<div id="footer" th:replace="@{user/footer}"></div>
+</body>
+</html>

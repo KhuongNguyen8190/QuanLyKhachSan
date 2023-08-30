@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="/css/sign-up.css">
+    </head>
+    <body>
+        <div id="header" th:replace="@{user/menu}"></div>>
+        <div id="sign-up">
+            <div class="sign-up">
+                <div class="heading">ĐĂNG KÍ</div>
+                <form>
+                    <div class="mb-3 mt-4">
+                        <input type="email" class="form-control" id="email">
+                        <label for="email" class="form-label">Email</label>
+                    </div>
+                    <div class="mb-3 mt-4">
+                        <input type="password" class="form-control"
+                            id="password">
+                        <label for="password" class="form-label">Mật Khẩu</label>
+                    </div>
+                    <div class="mb-3 mt-4">
+                        <input type="password" class="form-control"
+                            id="re-password">
+                        <label for="re-password" class="form-label">Xác Thực Mật
+                            Khẩu</label>
+                    </div>
+                    <button type="submit" class="btn btn-primary">Đăng Kí</button>
+                    <div class="mb-3 mt-4">
+                        Đã có tài khoản?<a onclick="redirectURL('sign-in')"> Đăng
+                            Nhập Ngay</a>
+                    </div>
+                </form>
+            </div>
+        </div>
+        <div id="footer" th:replace="@{user/footer}"></div>
+        <script
+            src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+        <script>
+        const inputs = document.querySelectorAll('.form-control');
+        const labels = document.querySelectorAll('.form-label');
+
+        inputs.forEach(function(input, index) {
+        input.addEventListener('blur', function() {
+            if (input.value.trim() !== '') {
+            labels[index].textContent = input.getAttribute('data-label');
+            }
+        });
+        });
+
+
+
+    </script>
+    </body>
+</html>

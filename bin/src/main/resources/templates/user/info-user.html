@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="/css/info-user.css">
+</head>
+<body>
+	<div id="header" th:replace="@{user/menu}"></div>
+	<div class="content">
+		<div class="heading">Thông Tin Khách Hàng</div>
+<div style="color: red; text-align: center">[[${message}]]</div>
+		<form th:object="${form}">
+			<div class="mb-3">
+				<label for="username">Tài Khoản:</label> <input type="text" name
+					id="username" th:field="*{username}" readonly>
+			</div>
+			<div class="mb-3">
+				<label for="fullname">Chủ Tài Khoản:</label> <input type="text" name
+					id="fullname" th:field="*{fullname}">
+			</div>
+			<div class="mb-3">
+				<label for="security">CCCD/CMND:</label> <input type="text" name
+					id="security" th:field="*{cccd}">
+			</div>
+			<div class="mb-3">
+				<label>Giới Tính:</label><input type="radio" th:field="*{gender}"
+					name="gender" value="true" id="male"><label for="male">Nam</label><input
+					type="radio" th:field="*{gender}" name="gender" value="false"
+					id="female"><label for="female">Nữ</label>
+			</div>
+			<div class="mb-3">
+				<label for="phone">Số Điện Thoại:</label> <input type="text" name
+					id="phone" th:field="*{phone}">
+			</div>
+			<div class="mb-3">
+				<label for="address">Địa Chỉ Thường Trú:</label> <input type="text"
+					id="address" th:field="*{address}">
+			</div>
+			<button type="submit"
+				th:formaction="@{|/info-user/update/${key}|}"
+				class="btn btn-success">Lưu Thay Đổi</button>
+		</form>
+	</div>
+	<div id="footer" th:replace="@{user/footer}"></div>
+</body>
+</html>

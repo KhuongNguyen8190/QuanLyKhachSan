@@ -1,0 +1,43 @@
+{
+    "-NaLk_ZY5jUghqVvmEoW": {
+        "address": "TP HCM",
+        "cccd": "123456789012",
+        "fullname": "Nguyễn Duy Khương",
+        "gender": true,
+        "password": "12345",
+        "phone": "0587792049",
+        "role": [
+            "USER",
+            "GUEST"
+        ],
+        "username": "khuong8177@gmail.com"
+    },
+    "-NaLm823Kgq1llxwsFMY": {
+        "address": "Cà Mau",
+        "cccd": "11111",
+        "fullname": "Đỗ Thanh Vẹn",
+        "gender": true,
+        "password": "123",
+        "phone": "123123",
+        "role": [
+            "USER",
+            "GUEST",
+            "ADMIN"
+        ],
+        "username": "klasink@gmail.com"
+    },
+    "-NaMMxTwLog8oQN69hM0": {
+        "address": "Cà Mau",
+        "cccd": "11111",
+        "fullname": "Đỗ Thanh Vẹo",
+        "gender": true,
+        "password": "123",
+        "phone": "123123",
+        "role": [
+            "USER",
+            "GUEST",
+            "ADMIN"
+        ],
+        "username": "klasink2511@gmail.com"
+    }
+}

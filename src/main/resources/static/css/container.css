@@ -1,0 +1,279 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+#carouselExampleIndicators .carousel-item {
+    max-height: 600px;
+}
+
+#carouselExampleIndicators .carousel-item img {
+    object-fit: cover;
+    width: 100%;
+    height: 600px;
+}
+
+.main-container {
+    padding-bottom: 40px;
+    background: white;
+    margin-top: 70px;
+}
+
+.main-container .contact-slogan {
+    padding: 50px 20px;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    transition: all .5s ease;
+}
+
+.text-animation {
+    font-size: 24px;
+    font-weight: bold;
+    position: relative;
+    animation: textChange 2s infinite;
+    transition: all .5s ease;
+}
+
+@keyframes textChange {
+    0% {
+        content: "I'm Developer";
+    }
+
+    50% {
+        content: "I'm";
+    }
+
+    100% {
+        content: "I'm Coder";
+    }
+}
+
+
+.main-container .contact-slogan .slogan {
+    color: blue;
+    padding: 10px 0;
+    font-size: 30px;
+    transition: all .5s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: row;
+}
+
+#text-animation {
+    margin: 0;
+    margin-left: 10px;
+    color: white;
+    background-color: orangered;
+    padding: 0 10px;
+    border-radius: 5px;
+}
+
+.main-container .contact-slogan .contact {
+    background-color: white;
+    padding: 50px 20px;
+    border-radius: 5px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: all .5s ease;
+}
+
+.main-container .contact-slogan .contact label {
+    font-size: 33px;
+    color: blue;
+}
+
+.main-container .contact-slogan .contact input {
+    width: 500px;
+    padding: 15px 0;
+    padding-left: 5px;
+    border: none;
+    outline: none;
+    border-bottom: 1px solid orangered;
+    border-left: 1px solid orangered;
+    border-top: 1px solid orangered;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+    color: orangered;
+}
+
+.main-container .contact-slogan .contact button {
+    padding: 15px 30px;
+    border-radius: 5px;
+    background-color: orangered;
+    color: white;
+    border: none;
+}
+
+.room {
+    position: relative;
+    width: 100%;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+
+.room .room-order {
+    position: relative;
+    background-color: white;
+    min-height: 450px;
+    width: 300px;
+    border-radius: 5px;
+    margin: 5px 5px;
+    text-align: center;
+    transition: all .5s ease;
+    cursor: pointer;
+    text-decoration: none;
+    border: 1px solid lightgrey;
+}
+
+.room .room-order:hover {
+    transform: scale(1.02);
+}
+
+.room .room-order .heading {
+    padding: 10px 0;
+}
+
+.room .room-order .price {
+    padding: 10px 0;
+}
+
+.room .room-order img {
+    width: 100%;
+    height: 200px;
+    overflow: hidden;
+}
+
+.room .room-order .content {
+    padding: 10px 0;
+    height: 150px;
+}
+
+.room .room-order .check-room {
+    margin: 10px 0;
+}
+
+.room .room-order .submit {
+    padding: 10px 20px;
+    background: blue;
+    color: white;
+    border: none;
+    transition: all .5s ease;
+}
+
+.room .room-order .submit:hover {
+    opacity: .5;
+    transition: all .5s ease;
+}
+
+.service {
+    padding: 30px 0px;
+    margin: 60px 30px 0 30px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 5px;
+}
+
+.service>div {
+    padding: 20px 0;
+}
+
+.service .pool,
+.service .bar,
+.service .restaurant,
+.service .fitness {
+    display: flex;
+    flex-direction: row-reverse;
+    position: relative;
+
+}
+
+.service>div .content {
+    padding: 0 20px;
+    transition: all .5s ease;
+}
+
+.service>div .content .heading {
+    color: red;
+    font-weight: bold;
+    font-size: 22px;
+    transition: all .5s ease;
+}
+
+.service>div .image img {
+    width: 500px;
+    border-radius: 5px;
+    transition: all .5s ease;
+}
+
+@media screen and (max-width:836px) {
+    .room .room-order {
+        max-width: 600px;
+        min-width: 400px;
+        min-height: 500px;
+        margin: 5px 5px;
+    }
+
+    .room .room-order img {
+        height: 300px;
+    }
+}
+
+@media screen and (max-width:952px) {
+    .contact-slogan .contact {
+        flex-direction: column;
+    }
+
+    .contact-slogan .contact div {
+        display: flex;
+        width: 100%;
+        height: 50px;
+        justify-content: center;
+    }
+
+    .contact-slogan .contact button {
+        width: 150px;
+        padding: 5px !important;
+    }
+}
+
+@media screen and (max-width:1000px) {
+    .service>div .image img {
+        width: 400px;
+    }
+
+    .service>div .main-content {
+        font-size: 15px;
+        transition: all .5s ease;
+    }
+}
+
+@media screen and (max-width:810px) {
+    .service>div .image img {
+        width: 300px;
+    }
+}
+
+@media screen and (max-width:750px) {
+    .service {
+        padding: 0 60px;
+    }
+
+    .service>div {
+        display: flex;
+        flex-direction: column !important;
+    }
+
+    .service>div .image img {
+        width: 100%;
+    }
+
+    .service>div .content {
+        padding: 0;
+        margin-bottom: 5px;
+    }
+}

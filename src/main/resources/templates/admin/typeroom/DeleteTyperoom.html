@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="/css/admin/type-room.css">
+	<style>
+		span {
+			color: red;
+			
+		}
+	</style>
+</head>
+
+<body>
+	<div class="modal fade" id="modalRegisterFormdelete" tabindex="-1" aria-labelledby="myModalLabel" aria-hidden="true">
+		<div class="modal-dialog" role="document">
+			<div class="modal-content">
+				<div class="modal-header text-center">
+					<h4 class="modal-title w-100 font-weight-bold">Xóa loại phòng</h4>
+				</div>
+				<form  method="post">
+					<button type="submit" class="btn btn-success" th:formaction="@{|/deleteTyperoom/${key}|}">Xóa</button> 
+				</form>
+			</div>
+		</div>
+	</div>
+</body>
+<script>
+	window.addEventListener("load", function() {
+	let params = new URLSearchParams(window.location.search);
+	var paramID = params.get("iddelete");
+	if (paramID != null) {
+		$('#modalRegisterFormdelete').modal('show');
+	}
+	})
+	
+</script>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns="http://www.thymeleaf.org">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Document</title>
+	<link rel="stylesheet" href="/css/admin/model.css">
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css"
+		integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<script src="https://cdn.ckeditor.com/ckeditor5/37.1.0/classic/ckeditor.js"></script>
+</head>
+
+<body>
+	<!--Typeroom-->
+	<div id="createModel" th:replace="@{admin/typeroom/CreateTyperoom.html}"></div>
+	<div id="createModel" th:replace="@{admin/typeroom/UpdateTyperoom.html}"></div>
+	<div id="createModel" th:replace="@{admin/typeroom/DeleteTyperoom.html}"></div>
+	<!--Serviceroom-->
+	<div id="createModel" th:replace="@{admin/serviceroom/CreateServiceroom.html}"></div>
+	<div id="createModel" th:replace="@{admin/serviceroom/UpdateServiceroom.html}"></div>
+	<div id="createModel" th:replace="@{admin/serviceroom/DeleteServiceroom.html}"></div>
+	<!--Room-->
+	<div id="createModel" th:replace="@{admin/room/Createroom.html}"></div>
+	<div id="createModel" th:replace="@{admin/room/Updateroom.html}"></div>
+	<div id="createModel" th:replace="@{admin/room/Deleteroom.html}"></div>
+	<div id="header" th:replace="@{admin/menu}"></div>
+
+	<div class="container">
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+				aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+			<div class="collapse navbar-collapse" id="navbarSupportedContent">
+				<ul class="navbar-nav mr-auto">
+					<li class="nav-item dropdown">
+						<a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+							data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+							Quản lí
+						</a>
+						<div class="dropdown-menu" aria-labelledby="navbarDropdown">
+							<a class="dropdown-item" th:href="@{|/admin/management?option=Room|}">Phòng</a>
+							<a class="dropdown-item" th:href="@{|/admin/management?option=Typeroom|}">Loại phòng</a>
+							<a class="dropdown-item" th:href="@{|/admin/management?option=Service|}">Dịch vụ</a>
+						</div>
+					</li>
+				</ul>
+				<form class="form-inline my-2 my-lg-0" name="frmsearch" th:action="@{|/admin/management|}" method="get">
+					<input type="hidden" name="option" id="setdata">
+					<input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search"
+						name="keyword">
+					<button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+				</form>
+			</div>
+		</nav>
+		<br>
+		<br>
+		<div style="display: block;" id="room">
+			<label style="font-size: 24px; font-weight: 600;">Phòng</label> <br>
+			<br>
+			<button data-bs-toggle="modal" class="btnCreateModel" data-bs-target="#modalRegisterFormCreaRoom">Thêm
+				Mới</button>
+			<table class="table tableRoom">
+				<thead>
+					<th scope="col">Tên phòng</th>
+					<th scope="col">Loại Phòng</th>
+					<th scope="col">Tình trạng</th>
+					<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="room : ${listroom}" th:object="${room.value}">
+						<td th:text="*{#strings.capitalizeWords(name)}"></td>
+						<td th:text="*{typeroom}"></td>
+						<td th:text="*{status}"></td>
+						<td><a th:href="@{|/admin/management/${room.key}?room=*{name}|}" class="btn btn-success">Sửa</a>
+							<a th:href="@{|/admin/management/${room.key}?roomdelete=*{name}|}"
+								class="btn btn-danger">Xóa</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div style="display: none;" id="typeroom">
+			<label style="font-size: 24px; font-weight: 600;">Loại
+				phòng</label> <br> <br>
+			<button data-bs-toggle="modal" class="btnCreateModel" data-bs-target="#modalRegisterForm">Thêm Mới</button>
+			<table class="table tableTyperoom">
+				<thead>
+					<tr>
+						<th scope="col" style="width: 240px;">Hình Ảnh</th>
+						<th scope="col">Loại Phòng</th>
+						<th scope="col">Giá/Ngày</th>
+						<th scope="col">Mô tả</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="type : ${listtype}" th:object="${type.value}">
+						<td th:unless="*{images}" style="width: 22%;"></td>
+						<td class="flex-images">
+							<img th:each="image : *{images}" th:src="@{'data:image/png;base64,' + ${image}}" />
+						</td>
+						<td th:text="*{#strings.capitalizeWords(name)}"></td>
+						<td th:text="*{#numbers.formatDecimal(price,0,'COMMA',0,'POINT')}"></td>
+						<td>[(*{description})]</td>
+						<td><a th:href="@{|/admin/management/${type.key}?option=Typeroom&id=*{name}|}" class="btn btn-success">Sửa</a>
+							<a th:href="@{|/admin/management/${type.key}?option=Typeroom&iddelete=*{name}|}"
+								class="btn btn-danger">Xóa</a>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+		<div style="display: none;" id="service"><label style="font-size: 24px; font-weight: 600;">Dịch
+				vụ</label> <br> <br>
+			<button data-bs-toggle="modal" class="btnCreateModel" data-bs-target="#modalRegisterFormCreaServ">Thêm
+				Mới</button>
+			<table class="table tableService">
+				<thead>
+					<tr>
+						<th scope="col">Hình ảnh</th>
+						<th scope="col">Tên Dịch Vụ</th>
+						<th scope="col">Giá Loại Phòng</th>
+						<th scope="col">Người tạo</th>
+						<th scope="col">Ngày tạo</th>
+						<th scope="col">Mô tả</th>
+						<th scope="col">Tình trạng</th>
+						<th scope="col"></th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr th:each="serv : ${listserv}" th:object="${serv.value}">
+						<td><img th:src="@{*{image}}"></td>
+						<td th:text="*{#strings.capitalizeWords(name)}"></td>
+						<td th:text="*{#numbers.formatDecimal(price,0,'COMMA',0,'POINT')}"></td>
+						<td th:text="*{usercreated}"></td>
+						<td th:text="*{datecreated}"></td>
+						<td>[(*{description})]</td>
+						<td th:text="*{status}"></td>
+						<td><a th:href="@{|/admin/management/${serv.key}?option=Service&service=*{name}|}"
+								class="btn btn-success">Sửa</a>
+							<a th:href="@{|/admin/management/${serv.key}?option=Service&servicedelete=*{name}|}"
+								class="btn btn-danger">Xóa</a>
+						</td>
+					</tr>
+				</tbody>
+			</table>
+		</div>
+	</div>
+	<div id="footer" th:replace="@{user/footer}"></div>
+	<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/popper.js@1.12.9/dist/umd/popper.min.js"
+		integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+		crossorigin="anonymous"></script>
+	<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js"
+		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+		crossorigin="anonymous"></script>
+	<script>
+		window.addEventListener("load", function () {
+			let params = new URLSearchParams(window.location.search);
+			var paramID = params.get("option");
+			if (paramID != null) {
+				document.getElementById("setdata").value = paramID;
+				switch (paramID) {
+					case 'Room':
+						document.getElementById("room").style.display = "block";
+						document.getElementById("typeroom").style.display = "none";
+						document.getElementById("service").style.display = "none";
+
+						break;
+					case 'Typeroom':
+						document.getElementById("room").style.display = "none";
+						document.getElementById("typeroom").style.display = "block";
+						document.getElementById("service").style.display = "none";
+						break;
+					case 'Service':
+						document.getElementById("room").style.display = "none";
+						document.getElementById("typeroom").style.display = "none";
+						document.getElementById("service").style.display = "block";
+						break;
+					default:
+						document.getElementById("room").style.display = "block";
+						document.getElementById("typeroom").style.display = "none";
+						document.getElementById("service").style.display = "none";
+				}
+			}
+		})
+	</script>
+	<script>
+		window.addEventListener("load", function () {
+			let params = new URLSearchParams(window.location.search);
+			var paramID = params.get("status");
+			if (paramID != null && paramID == 'false') {
+				thongBao("Thông Báo", "Không thành công! Trùng tên", "error", false);
+			} else if (paramID != null && paramID == 'true') {
+				thongBao("Thông Báo", "Thành công", "success", false);
+			} else { }
+
+		})
+	</script>
+</body>
+
+</html>

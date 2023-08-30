@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Document</title>
+<link rel="stylesheet" href="/css/info-user.css">
+</head>
+<body>
+	<div id="header" th:replace="@{user/menu}"></div>
+	<div class="content">
+		<div class="heading">Thông Tin Khách Hàng</div>
+		<form th:object="${form}">
+			<div class="mb-3">
+				<label for="inputImage">Hình Ảnh: </label> <input type="file"
+					class="form-control" id="inputImage" aria-describedby="emailHelp"
+					name="role" style="display: none"> <input type="hidden"
+					id="srcImg" th:field="*{image}"></input> <label for="inputImage"
+					id="chooseImage">Chọn Ảnh</label>
+				<div class="formImage mt-3">
+					<img style="width: 300px" th:src="*{image}" id="imgload">
+				</div>
+			</div>
+			<div class="mb-3">
+				<label for="fullname">Chủ Tài Khoản:</label> <input type="text"
+					th:field="*{fullname}" id="fullname">
+			</div>
+			<div class="mb-3">
+				<label for="security">CCCD/CMND:</label> <input type="text"
+					th:field="*{cccd}" id="cccd" placeholder>
+			</div>
+			<div class="mb-3">
+				<label>Giới Tính:</label> <input type="radio" name="gender"
+					id="male" th:field="*{gender}" value="true"><label
+					for="male">Nam</label> <input type="radio" name="gender"
+					id="female" th:field="*{gender}" value="false"><label
+					for="female">Nữ</label>
+			</div>
+			<div class="mb-3">
+				<label for="phone">Số Điện Thoại:</label> <input type="text"
+					th:field="*{phone}" id="phone">
+			</div>
+			<div class="mb-3">
+				<label for="address">Địa Chỉ Thường Trú:</label> <input type="text"
+					th:field="*{address}" id="address">
+			</div>
+		</form>
+		<button type="submit" class="changeInfo">Lưu thay đổi</button>
+	</div>
+	<div id="footer" th:replace="@{user/footer}"></div>
+</body>
+
+<script>
+	document.querySelector("#inputImage").addEventListener("change", readFile);
+
+	function readFile() {
+		const FR = new FileReader();
+		FR.addEventListener("load", function(evt) {
+			document.querySelector("#imgload").src = evt.target.result;
+			document.querySelector("#srcImg").value = evt.target.result;
+		});
+		FR.readAsDataURL(this.files[0]);
+	}
+
+	function isValidPhoneNumber(phoneNumber) {
+		  const phoneRegex = /^(0|\+84)(\s|\.|_|-)?((3[2-9])|(5[689])|(7[06-9])|(8[1-689])|(9[0-46-9]))(\d)(\s|\.|_|-)?(\d{3})(\s|\.|_|-)?(\d{3})$/;
+		  return phoneRegex.test(phoneNumber);
+	}
+	
+	function isValidID(citizenID) {
+		  // Loại bỏ khoảng trắng nếu có
+		  citizenID = citizenID.replace(/\s/g, '');
+
+		  const regex = /^\d{10}$|^\d{12}$/;
+		  return regex.test(citizenID);
+		}
+	
+	$(document).ready(function() {
+		$(".changeInfo").click(function() {
+			const fullname = $("#fullname").val(); 
+			const cccd = $("#cccd").val();
+			const phone = $("#phone").val();
+			const address = $("#address").val();
+			const image = $("#srcImg").val();
+			const gender = $("input[name='gender']:checked").val();
+			
+			if(isValidPhoneNumber(phone) === false){
+				thongBao('Thông Báo','Số điện thoại không hợp lệ!',
+				'error');
+				return;
+			}
+			
+			if(isValidID(cccd) === false){
+				thongBao('Thông Báo','CMND/CCCD không hợp lệ!',
+				'error');
+				return;
+			}
+			
+			$.ajax({
+				type : "POST",
+				url : "/info-user/update",
+				data:{
+					fullname: fullname,
+					cccd : cccd,
+					phone : phone,
+					address : address,
+					image : image,
+					gender : gender
+				},
+				success : function(response) {
+					if (response === true) {
+						thongBao('Thông Báo','Thay đổi thông tin thành công!',
+								'success');
+					} else {
+						thongBao('Thông Báo','Thay đổi thông tin thất bại!',
+								'error');
+					}
+				},
+				error : function(xhr, status, error) {
+					console.error(error);
+				}
+			});
+		});
+	});
+</script>
+</html>
